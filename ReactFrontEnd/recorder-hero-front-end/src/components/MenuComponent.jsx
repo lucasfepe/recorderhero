@@ -30,7 +30,7 @@ class MenuComponent extends React.Component {
         
           <header>
             <MDBNavbar color="default-color" dark expand="md">
-              <MDBNavbarBrand href="/">
+              <MDBNavbarBrand href="/home">
                 <strong>RecorderHeroLogo</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={this.onClick} />

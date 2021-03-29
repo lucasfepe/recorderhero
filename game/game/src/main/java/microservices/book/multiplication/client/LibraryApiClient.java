@@ -7,10 +7,12 @@ import microservices.book.multiplication.configuration.AdminLogin;
 import microservices.book.multiplication.configuration.DatabaseApi;
 import microservices.book.multiplication.configuration.LibraryApi;
 import microservices.book.multiplication.game.DatabaseService;
+import microservices.book.multiplication.jwt.JwtTokenResponse;
 import microservices.book.multiplication.model.Session;
 import microservices.book.multiplication.model.SessionDTO;
 import microservices.book.multiplication.model.UserCoursesDTO;
 import microservices.book.multiplication.util.Notes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -18,6 +20,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -27,7 +30,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@EnableConfigurationProperties({LibraryApi.class})
+@EnableConfigurationProperties({LibraryApi.class, AdminLogin.class})
 public class LibraryApiClient  {
 
 
@@ -37,23 +40,30 @@ public class LibraryApiClient  {
     private RestTemplateBuilder restTemplateBuilder;
     private LibraryApi libraryApi;
     private AdminLogin adminLogin;
+//    @Autowired
+//    private JwtTokenResponse jwtTokenResponse;
 
     public LibraryApiClient(RestTemplateBuilder restTemplateBuilder,
                             LibraryApi libraryApi,
-
+                            AdminLogin adminLogin,
                             @Value("${service.library.host}") final String libraryHostUrl) {
         this.libraryApi = libraryApi;
-
+        this.adminLogin = adminLogin;
         this.restTemplateBuilder = restTemplateBuilder;
         this.libraryHostUrl = libraryHostUrl;
+
     }
 
-    public boolean libraryArchive( GameDTO gameDTO, String username, String password) {
+    public boolean libraryArchive( GameDTO gameDTO, String header) {
 
 
         try {
 
-            this.restTemplate = restTemplateBuilder.basicAuthentication(username, password).build();
+            this.restTemplate = restTemplateBuilder
+                    .additionalInterceptors((ClientHttpRequestInterceptor) (request, body, execution) -> {
+                        request.getHeaders().add("Authorization",  header);
+                        return execution.execute(request, body);
+                    }).build();
             builder = UriComponentsBuilder
                     .fromUriString(libraryHostUrl + libraryApi.getPostSession());
             log.info("Querying: {}", builder.toUriString());

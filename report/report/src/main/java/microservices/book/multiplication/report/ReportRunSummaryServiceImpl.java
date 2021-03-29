@@ -2,7 +2,6 @@ package microservices.book.multiplication.report;
 
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
-import microservices.book.multiplication.client.GameDTO;
 import microservices.book.multiplication.client.ReportDTO;
 import microservices.book.multiplication.model.NoteHistory;
 import microservices.book.multiplication.util.MapUtil;

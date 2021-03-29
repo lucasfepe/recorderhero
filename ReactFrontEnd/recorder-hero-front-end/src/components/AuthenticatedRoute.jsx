@@ -6,6 +6,7 @@ class AuthenticatedRoute extends Component {
 
     componentWillMount(){
         AuthenticationService.setupAxiosInterceptors();
+        
     }
 
     render() {

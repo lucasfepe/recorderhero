@@ -7,9 +7,6 @@ import microservices.book.multiplication.util.Key;
 import microservices.book.multiplication.util.Mode;
 import microservices.book.multiplication.util.Notes;
 
-import java.util.List;
-
-
 
 @Data
 @ToString

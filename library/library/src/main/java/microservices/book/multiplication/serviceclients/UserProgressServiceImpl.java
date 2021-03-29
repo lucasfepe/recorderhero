@@ -1,11 +1,13 @@
 package microservices.book.multiplication.serviceclients;
 
 import lombok.extern.slf4j.Slf4j;
+import microservices.book.multiplication.configuration.AdminLogin;
 import microservices.book.multiplication.configuration.DatabaseApi;
 import microservices.book.multiplication.model.User;
 import microservices.book.multiplication.library.UserProgressService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.core.ParameterizedTypeReference;
@@ -25,27 +27,29 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@EnableConfigurationProperties(DatabaseApi.class)
+@EnableConfigurationProperties({DatabaseApi.class, AdminLogin.class})
 public class UserProgressServiceImpl implements UserProgressService {
 
     private UriComponentsBuilder builder;
     private RestTemplate restTemplate;
+    private AdminLogin adminLogin;
     private final String databaseHostUrl;
     private RestTemplateBuilder restTemplateBuilder;
     private DatabaseApi databaseApi;
 
     public UserProgressServiceImpl(RestTemplateBuilder restTemplateBuilder,
-                                   DatabaseApi databaseApi,
+                                   DatabaseApi databaseApi, AdminLogin adminLogin,
                                    @Value("${service.database.host}") final String databaseHostUrl) {
         this.databaseApi = databaseApi;
         this.restTemplateBuilder = restTemplateBuilder;
+        this.adminLogin = adminLogin;
         this.databaseHostUrl = databaseHostUrl;
     }
 
     @Override
-    public Optional<Boolean> isCourseUnfinished(final String username, String principalUsername, String password) throws UsernameNotFoundException {
+    public Optional<Boolean> isCourseUnfinished(final String username) throws UsernameNotFoundException {
         try {
-            this.restTemplate = restTemplateBuilder.basicAuthentication(principalUsername, password).build();
+            this.restTemplate = restTemplateBuilder.basicAuthentication(adminLogin.getUsername(), adminLogin.getPassword()).build();
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getFindByUsernameUri())
                     .queryParam("username", username);

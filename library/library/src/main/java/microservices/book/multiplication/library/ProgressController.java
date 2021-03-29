@@ -22,9 +22,7 @@ public class ProgressController {
 
     @GetMapping("/hasunfinishedcourse")
     boolean userHasUnifishedCourse(@RequestParam("username") String username) {
-        Optional<Boolean> hasUnfinishedCourse = userProgressService.isCourseUnfinished(username,
-                SecurityContextHolder.getContext().getAuthentication().getName(),
-                SecurityContextHolder.getContext().getAuthentication().getCredentials().toString());
+        Optional<Boolean> hasUnfinishedCourse = userProgressService.isCourseUnfinished(username);
         log.info("User {} has unfinished course: {}", username, hasUnfinishedCourse);
 
         return hasUnfinishedCourse.orElseGet(() -> { return null; });
@@ -32,9 +30,7 @@ public class ProgressController {
 
     @GetMapping("/courses")
     String getUserCoursesForUser(@RequestParam("username") String username) {
-        String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username,
-                SecurityContextHolder.getContext().getAuthentication().getName(),
-                SecurityContextHolder.getContext().getAuthentication().getCredentials().toString());
+        String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username);
         log.info("User {} has retrieved course list", username);
 
         return userCoursesJson;

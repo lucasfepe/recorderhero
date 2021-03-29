@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.annotation.SessionScope;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 
@@ -49,13 +50,14 @@ public class GameController {
     }
 
     @PostMapping("/end_game")
-    boolean archiveSession(@RequestBody GameDTO gameDTO) throws JsonProcessingException, InterruptedException {
+    boolean archiveSession(@RequestBody GameDTO gameDTO, HttpServletRequest request) throws JsonProcessingException, InterruptedException {
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        JsonNode jsonNode = objectMapper.readTree(string);
 //        log.info(jsonNode.toPrettyString());
+        String header = request.getHeader("Authorization");
         log.info("Querying end_game {}",gameDTO);
         if(true) {
-            libraryApiClient.libraryArchive(gameDTO, SecurityContextHolder.getContext().getAuthentication().getName(), SecurityContextHolder.getContext().getAuthentication().getCredentials().toString());
+            libraryApiClient.libraryArchive(gameDTO, header);
             log.info("true!!!!!!!!!!!!!!!!!!");
             return true;
         }

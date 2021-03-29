@@ -1,15 +1,11 @@
 package microservices.book.multiplication.report;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import microservices.book.multiplication.client.GameDTO;
 import microservices.book.multiplication.client.ReportDTO;
 import microservices.book.multiplication.model.NoteHistory;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
 import java.util.List;
 
 

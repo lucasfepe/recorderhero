@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface UserProgressService {
 
-    Optional<Boolean> isCourseUnfinished(String username, String principalUsername, String password);
+    Optional<Boolean> isCourseUnfinished(String username);
 }

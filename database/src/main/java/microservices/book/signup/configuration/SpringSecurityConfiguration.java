@@ -1,6 +1,7 @@
 package microservices.book.signup.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -47,12 +48,12 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .headers().frameOptions().sameOrigin().and()
+        http.headers().frameOptions().sameOrigin().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/signup","/users/search/findByUsernameIgnoreCase**","/authoritieses/search/findByUsernameIgnoreCase**").permitAll()
                 .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .antMatchers("/signup","/users/search/findByUsernameIgnoreCase**","/authoritieses/search/findByUsernameIgnoreCase**").permitAll()
         	.antMatchers("/**").authenticated()
 
 

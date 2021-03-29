@@ -25,49 +25,61 @@ class AuthenticationService {
 
       
     
-     
-
-    executeBasicAuthenticationService(username, password) {
-        this.createBasicAuthToken(username,password);
-        return instance.get(`${API_URL}/basicauth`,
-            { headers: { authorization: sessionStorage.getItem(USER_TOKEN) } })
+    executeJwtAuthenticationService(username, password) {
+        console.log(username);
+        
+        return axios.post(`${API_URL}/authenticate`, {
+            username,
+            password
+        })
     }
+
+    // executeBasicAuthenticationService(username, password) {
+    //     this.createBasicAuthToken(username,password);
+    //     return instance.get(`${API_URL}/basicauth`,
+    //         { headers: { authorization: sessionStorage.getItem(USER_TOKEN) } })
+    // }
 
    
 
-    createBasicAuthToken(username, password) {
-        sessionStorage.setItem(USER_TOKEN, 'Basic ' + window.btoa(username + ":" + password))
+    // createBasicAuthToken(username, password) {
+    //     sessionStorage.setItem(USER_TOKEN, 'Basic ' + window.btoa(username + ":" + password))
         
-    }
+    // }
 
-    registerSuccessfulLogin(username, password, roles) {
-        //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
-        //console.log('registerSuccessfulLogin');
-        sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+//     registerSuccessfulLogin(username, password, roles) {
+//         //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
+//         //console.log('registerSuccessfulLogin');
+//         sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username);
         
-        sessionStorage.setItem(USER_ROLES_SESSION_ATTRIBUTE_NAME, JSON.stringify(roles));
+//         sessionStorage.setItem(USER_ROLES_SESSION_ATTRIBUTE_NAME, JSON.stringify(roles));
         
-        // this.setupAxiosInterceptors(sessionStorage.getItem(USER_TOKEN));
+//         // this.setupAxiosInterceptors(sessionStorage.getItem(USER_TOKEN));
 
 
+// }
+registerSuccessfulLoginForJwt(username, token) {
+    sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+
+    sessionStorage.setItem(USER_TOKEN, this.createJWTToken(token))
+    this.setupAxiosInterceptors()
+    
+}
+
+createJWTToken(token) {
+    return 'Bearer ' + token
 }
 
   
-    createJWTToken(token) {
-        return 'Bearer ' + token
-    }
 
 
     logout() {
         sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+        sessionStorage.removeItem(USER_TOKEN);
         
         sessionStorage.removeItem(USER_ROLES_SESSION_ATTRIBUTE_NAME);
         instance.interceptors.request.eject(inter);
-        return instance.get(`${API_URL}/basicauth`
         
-        // ,
-        //     { headers: { authorization: 'Basic ' + window.btoa('' + ":" + '') } }
-            )
         
 
     }

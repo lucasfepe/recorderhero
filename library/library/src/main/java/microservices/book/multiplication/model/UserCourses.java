@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 
-import javax.persistence.*;
 
 
 public class UserCourses extends RepresentationModel<UserCourses> {

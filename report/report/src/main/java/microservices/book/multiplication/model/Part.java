@@ -1,14 +1,10 @@
 package microservices.book.multiplication.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 
 
-@Entity
 public class Part {
 
-	@Id 
 	private int part;
 
 	public int getPart() {

@@ -3,9 +3,11 @@ package microservices.book.multiplication.serviceclients;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import microservices.book.multiplication.configuration.AdminLogin;
 import microservices.book.multiplication.configuration.DatabaseApi;
 import microservices.book.multiplication.library.UserCoursesService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @Service
-@EnableConfigurationProperties(DatabaseApi.class)
+@EnableConfigurationProperties({DatabaseApi.class, AdminLogin.class})
 public class UserCoursesServiceImpl implements UserCoursesService {
 
     private UriComponentsBuilder builder;
     private RestTemplate restTemplate;
+    private AdminLogin adminLogin;
     private final String databaseHostUrl;
     private DatabaseApi databaseApi;
     private RestTemplateBuilder restTemplateBuilder;
@@ -29,21 +32,21 @@ public class UserCoursesServiceImpl implements UserCoursesService {
 
 
     public UserCoursesServiceImpl(
-
+            AdminLogin adminLogin,
             DatabaseApi databaseApi, RestTemplateBuilder restTemplateBuilder, @Value("${service.database.host}") final String databaseHostUrl) {
         this.databaseApi = databaseApi;
         this.restTemplateBuilder = restTemplateBuilder;
-
+        this.adminLogin = adminLogin;
         this.databaseHostUrl = databaseHostUrl;
     }
 
 
 
     @Override
-    public String getAllUserCoursesByUsername(String username, String principalUsername, String password) {
+    public String getAllUserCoursesByUsername(String username) {
         try {
 
-            this.restTemplate = restTemplateBuilder.basicAuthentication(principalUsername, password).build();
+            this.restTemplate = restTemplateBuilder.basicAuthentication(adminLogin.getUsername(), adminLogin.getPassword()).build();
 
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getFindByUserUsernameUri())

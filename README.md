@@ -5,5 +5,5 @@ Technologies Used
 
 Front End
 
-![GitHub Logo](/images/logo.png)
+![GitHub Logo](/TechnologiesUsedImages/Reactjs-icon-vector-01.svg)
 Format: ![Alt Text](url)

@@ -1,46 +1,40 @@
-import React, { Fragment } from "react";
-import AuthenticationService from "../services/AuthenticationService";
-import MenuComponent from './MenuComponent';
-import { MDBBtn } from "mdbreact";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { getSessionStats } from '../modules/sessionStats'
+import { MDBProgress } from 'mdbreact'
 
 
-class NotesComponent extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-           challenge: false
-        }
+const NotesComponent = () => {
+
+   const dispatch = useDispatch();
+   const { accidentals } = useSelector((state) => state, shallowEqual);
+   const { sessionStats } = useSelector((state) => state);
+
+   useEffect(() => {
+      console.log("WHYYYYYYYYYYMEMEEEE")
+      console.log(accidentals)
+        dispatch(getSessionStats(accidentals.listOfEntries));
         
-    }
-
-    componentDidMount(){
-        this.setState({
-           
-    })
-    }
-
+   },[accidentals])
+   
     
 
-    render() {
         return (
             
                     
                     <div className="col-4  d-flex justify-content-center  align-content-center flex-wrap">
-                       
+                {sessionStats.map(c => <>
+                   <MDBProgress value={c[1] * 20} className="position-relative bg-dark" striped height="20px">
+                   <small className="justify-content-center align-items-center 
+d-flex position-absolute w-100 text-light "><span id="hi1" className="fullText">{c[0]}: {c[1]}/5</span></small>
 
-                    {this.state.challenge == false && <div>hi</div>
-                        
-        
-                    }
-        
-                </div>
+                   </MDBProgress>
+                  </>)}
+                  </div>
+);
+    
 
-
-               
-        );
-    }
-}
-
+                   }
 
 export default NotesComponent;

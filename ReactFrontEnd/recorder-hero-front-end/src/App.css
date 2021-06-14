@@ -1,19 +1,30 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import '../node_modules/mdbreact/dist/css/mdb.css';
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');
+
+.fullText{
+	display: inline-block;
+	font-size: 25px;
+	/*new:*/
+	font-family: 'Rowdies', cursive;
+	line-height: 19px;
+	
+}
 
 .App {
   text-align: center;
 }
 
-
-
+.loginwrapper{
+	text-align:center;
+	
+}
 #container, #container2{
 	width: 550px; 
 	height: 400px; 
 	margin: 0 auto;
-	justify-content: center;
-	display: flex;
-  align-items: center;
+	
   
 }
 .display-column {
@@ -40,13 +51,10 @@ th {
 }
 .formContainer{
   margin: 0 30%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.274), 0 0 20px rgba(85, 85, 85, 0.356);
   text-align:left;
 }
-.verticalCenter{
-  height: 100vh;
-  position: relative;
-  text-align: center
-}
+
 
 
 
@@ -280,15 +288,21 @@ tr{
   #noteRange{
 	  width:100%;
   }
-  .text{
-	  width: 100% !important;
+  .text.form-control{
+	  width:100% !important;
+  }
+  .form-group{
+	  width:80%;
+	  margin:0.8em auto 0;
   }
   .saveLoad{
     width:30%;
   }
   .formContainer{
-	  margin: 0 30%;
+	  margin: auto;
 	  text-align:left;
+	  width:max-content;
+	  min-height:600px;
   }
   
   .center{
@@ -391,11 +405,18 @@ margin: 0.5em;}
  	height: 100px !important;
  }
   .home.btn{
-	  padding:0.5em 0em !important;
-	  width: 40%;
+	  padding:1em 0em !important;
+	  width: 70%;
 	  height: auto;
+	  font-size:30px;
+	  font-family: 'Indie Flower', cursive;
+	  background:#15f384 !important;
 	  
 	  
+	  
+  }
+  .home.btn.login{
+	 margin-top:50% !important;
   }
   .btnSize{
 	   width:10em; 
@@ -410,11 +431,7 @@ margin: 0.5em;}
   background-color:#ddd;
   
   }
-  .verticalCenter{
-	  height: 100vh;
-	  position: relative;
-	  text-align: center
-  }
+  
   .grid{
 	/* display: grid; */
 	/* grid-template-columns: repeat(3, 1fr);

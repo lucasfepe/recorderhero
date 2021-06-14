@@ -1,149 +1,34 @@
-import * as React from "react";
-import AuthenticationService from "../services/AuthenticationService";
+import React, {  useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { allSessions  } from "../modules/sessions";
+import UserService from "../ServicesNew/UserService";
 import MenuComponent from './MenuComponent';
-import SignUpService from '../services/SignUpService';
-import LibraryApiClient from "../services/LibraryApiClient";
-import { MDBContainer, MDBBtn, MDBRow, MDBCol } from 'mdbreact';
-import ScriptTag from 'react-script-tag';
+import { MDBBtn } from "mdbreact";
+import { getReport } from "../modules/report";
 import  Highcharts from "highcharts";
-import ReportApiClient from '../services/ReportApiClient';
-import Select from 'react-select';
-import { MDBIcon } from 'mdbreact'
 
 
-class ReportGeneratorComponent extends React.Component {
+const ReportGeneratorComponent = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            session: "",
-            
-           sessions: [],
-           countKeySet: [],
-           mapMax: 0,
-           countValues: [],
-           correctValues: [],
-           timeMapMax: 0,
-           timeKeySet: [],
-           timeValues: [],
-           timeTotal: 0,
-           option: [],
-           overallNoteCorrect: 0,
-           overallNoteCount: 0
+    const dispatch = useDispatch();
+    var date = new Date();
 
-        }
-        
-      
-        this.componentDidMount = this.componentDidMount.bind(this);
-        this.retrieveSession = this.retrieveSession.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    componentDidMount(){
-        LibraryApiClient.getUserSessions(AuthenticationService.getLoggedInUserName()).then(res => {
-
-            this.setState({
-                sessions: res.data.content,
-                options:  res.data.content
-                .map(d => ({
-                  "value" : d.id,
-                  "label" : "Session "+d.id+": "+d.clef+" clef"
-                }))
-            })
-        }
-        ).catch(err => {console.log(err)});
-       
-        
-       
-        
-       
-    }
-
-   retrieveSession(){
-
-    ReportApiClient.getPastNotes(this.state.session ).then(res => {
-        console.log(res.data);
-        this.setState({
-           countKeySet: res.data.countKeySet,
-           mapMax: res.data.mapMax,
-           countValues: res.data.countValues,
-           correctValues: res.data.correctValues,
-           timeMapMax: res.data.timeMapMax,
-           timeKeySet: res.data.timeKeySet,
-           timeValues: res.data.timeValues,
-           timeTotal: res.data.timeTotal,
-           overallNoteCorrect: res.data.overallNoteCorrect,
-           overallNoteCount: res.data.overallNoteCount
-        })
-        this.reports();
-    }
-        ).catch(error => {console.log(error)})
-
-
-    
-}
-
-handleChange(e){
-    this.state.session = e.value;
-   }
-
+    const { sessions } = useSelector((state) => state)
+    const report = useSelector((state) => state.report)
+    const [value, setValue] = useState();
    
+    const onChange = event => setValue(event.target.value);
 
-    render() {
-
-        
-         
-
-        return (
-            <div className="display-column">
-                <MenuComponent />
-                Sessions
-                <MDBContainer size="sm">
-                <MDBRow>
-    <MDBCol size="4"></MDBCol>
-    <MDBCol size="4" className="text-center"> 
-
-    <Select options={this.state.options} onChange={this.handleChange.bind(this)}/>
-         
-        <MDBBtn gradient="aqua" onClick={this.retrieveSession}>Retrieve Session</MDBBtn>
-        </MDBCol>
-    <MDBCol size="4"></MDBCol>
-  </MDBRow>
-
-               
-</MDBContainer> 
-<ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/highcharts.js" />
-                <ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/modules/exporting.js" />
-                <div className="container">
-			<h2 align="center">Session Summary</h2>
-
-			<div id="container"
-				>
-                   
-                </div>
-		</div>
-		<div className="container2">
-			<h2 align="center">Reaction Time</h2>
-
-			<div id="container2"
-				>
-                    
-                </div>
-		</div>
-            </div>
-        );
-    }
-
-
-
-    reports(){
-
-
+   const generateReport = () => {
+    dispatch(getReport(value));
+        if(report.correctValues != null){
+    
+    
         // var Highcharts;
-    	Highcharts.setOptions({
-    	
-    		colors: ['rgba(135,197,255,0.5)', 'rgba(135,197,255,1)']
-    	});
+        Highcharts.setOptions({
+        
+            colors: ['rgba(135,197,255,0.5)', 'rgba(135,197,255,1)']
+        });
     Highcharts.chart('container', {
         chart: {
             type: 'column'
@@ -155,13 +40,13 @@ handleChange(e){
             text: ''
         },
         xAxis: {
-        	//page will not finish loading if this variable is empty or session has no notes
-            categories: this.state.countKeySet,
+            //page will not finish loading if this variable is empty or session has no notes
+            categories: report.countKeySet,
             crosshair: true
         },
         yAxis: {
             min: 0,
-            max:this.state.mapMax,
+            max:report.mapMax,
             title: {
                 text: 'Number of Time Note Appeared'
             }
@@ -187,19 +72,19 @@ handleChange(e){
         },
         series: [{
             name: 'Number of Appearances',
-            data: this.state.countValues
+            data: report.countValues
         },{name: 'Correct',
-        	data: this.state.correctValues
+            data: report.correctValues
     }]});
-    	
-  //chart setting area
-  //
-  //
-  //chart2
-  Highcharts.setOptions({
-    	
-    		colors: ['rgba(135,197,255,1)']
-    	});
+        
+    //chart setting area
+    //
+    //
+    //chart2
+    Highcharts.setOptions({
+        
+            colors: ['rgba(135,197,255,1)']
+        });
     Highcharts.chart('container2', {
         chart: {
             type: 'column'
@@ -211,12 +96,12 @@ handleChange(e){
         //     text: 'Note Reaction Time'
         // },
         xAxis: {
-            categories: this.state.timeKeySet,
+            categories: report.timeKeySet,
             crosshair: true
         },
         yAxis: {
             min: 0,
-            max:this.state.timeMapMax,
+            max:report.timeMapMax,
             title: {
                 text: 'Response time for each note (milliseconds)'
             }
@@ -237,19 +122,54 @@ handleChange(e){
         },
         series: [{
             name: 'Reaction Time',
-            data: this.state.timeValues
+            data: report.timeValues
         }]
     });
-  	
-  
-  //chart2
-  //
-  //
-  
     }
+    
+    //chart2
+    //
+    //
+    
+    }
+    useEffect(() => {
 
+        dispatch(allSessions(UserService.getUsername()));
+        
+    
+    
+       },[])
+   
+        return (
+            <div className="display-column">
+                <MenuComponent />
+                ReportGeneratorComponent
+                <select value={value} onChange={onChange} className="browser-default custom-select">
+                <option>Choose your option</option>
+                    {sessions.map(c => <option value={c.id} key={c.id}>{new Date(c.startTime).toString()}</option>)}
+          
+        </select>
+        <MDBBtn value="practice" gradient="aqua" onClick={generateReport}>Generate Report</MDBBtn>
+        <div className="container">
+			<h2 align="center">Session Summary</h2>
+           
 
+			<div id="container"
+				>
+                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
+		</div>
+		<div className="container2">
+			<h2 align="center">Reaction Time</h2>
 
+			<div id="container2"
+				>
+                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
+		</div>
+            </div>
+        );
+    
 }
 
 export default ReportGeneratorComponent;

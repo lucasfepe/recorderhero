@@ -1,0 +1,32 @@
+spring:
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: ['*']
+            allowedHeaders: ['*']
+
+#logging:
+#  level:
+#    org.springframework.cloud.gateway: TRACE
+#    org.springframework.http.server.reactive: DEBUG
+#    org.springframework.web.reactive: DEBUG
+#    reactor.ipc.netty: DEBUG
+#    reactor.netty: DEBUG
+
+#server:
+#  port: 8082
+#  forward-headers-strategy: framework # https://github.com/spring-projects/spring-boot/commit/959e161555a147cac812915b1677abb46e3a860b
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          login-client:
+#            provider: keycloak
+#            client-id: myclient
+#            scope: openid,profile,email
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8080/auth/realms/myrealm

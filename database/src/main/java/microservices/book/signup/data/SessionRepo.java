@@ -11,7 +11,7 @@ import java.util.List;
 @RepositoryRestResource(excerptProjection = InlineSession.class)
 public interface SessionRepo extends JpaRepository<Session, Integer> {
 
-    List<Session> findByUserUsername(String username);
+        List<Session> findByUserUsername(String username);
 
 
 }

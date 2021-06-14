@@ -1,6 +1,8 @@
 package microservices.book.signup.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import microservices.book.signup.user.User;
 import microservices.book.signup.util.Clef;
 import microservices.book.signup.util.Key;
@@ -19,6 +21,8 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Session implements Comparable<Session>{
 
 	@Id @GeneratedValue
@@ -35,17 +39,13 @@ public class Session implements Comparable<Session>{
 	private String lowNote;
 	@Column( nullable = false)
 	private Clef clef;
-
 	@Enumerated(EnumType.ORDINAL)
 	private Mode mode;
 	@Enumerated(EnumType.ORDINAL)
 	private Key keym;
-	@ManyToOne
-	private Challenges challenge;
-	
-	
-	
-	
+	@Column( nullable = true)
+	private String challengeCode;
+
 
 	@Override
 	public int compareTo(Session o) {

@@ -52,7 +52,7 @@ INSERT INTO COURSES (code, instrument, clef, octave_shift, low_note,high_note,pa
 ("ARBLIII",1,1,3,24,37,3);
 
 
-Insert into challenges(id,keym,accidentals,accid_Slider,number_Of_Notes,challenge_Number) values
+Insert into challenges(code,keym,accidentals,accid_Slider,number_Of_Notes,challenge_Number) values
 ("01",0,'OFF',0,30,1),
 ("02",0,'ON',30,30,2),
 ("03",0,'ON',70,30,3),
@@ -82,7 +82,7 @@ Insert into challenges(id,keym,accidentals,accid_Slider,number_Of_Notes,challeng
 ("113",11,'ON',100,30,3);
 
 
-insert into level (part_part,level, low_Note, high_Note, keym, accidentals, accidental_slider, points, challenge_id, max_star) values
+insert into level (part_part,level, low_Note, high_Note, keym, accidentals, accidental_slider, points, challenge_code, max_star) values
 (1,1,4,6,1,"OFF",0,NULL,NULL,0),
 (1,2,4,7,1,"OFF",0,NULL,NULL,0),
 (1,3,3,7,1,"OFF",0,NULL,NULL,0),

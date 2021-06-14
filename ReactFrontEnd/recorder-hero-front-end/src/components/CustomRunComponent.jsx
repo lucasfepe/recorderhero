@@ -1,5 +1,5 @@
 import * as React from "react";
-import AuthenticationService from "../services/AuthenticationService";
+import AuthenticationService from "../keycloak";
 import MenuComponent from './MenuComponent';
 
 

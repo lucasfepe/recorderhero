@@ -15,8 +15,9 @@ public class Challenges {
 
 
     @Id
-    @Column(length = 50)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String code;
     @Enumerated(EnumType.ORDINAL)
     private Key keym;
     @Column(length = 50)

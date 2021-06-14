@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import AuthenticationService from '../services/AuthenticationService';
+import AuthenticationService from '../keycloak';
 
 class AuthenticatedRoute extends Component {
 
     componentWillMount(){
         AuthenticationService.setupAxiosInterceptors();
-        
     }
 
     render() {

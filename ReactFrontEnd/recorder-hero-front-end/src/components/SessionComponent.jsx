@@ -1,31 +1,20 @@
-import React, { Fragment } from "react";
-import AuthenticationService from "../services/AuthenticationService";
+import React, { Fragment, useState } from "react";
+import AuthenticationService from "../keycloak";
 import MenuComponent from './MenuComponent';
 import NoteDisplayComponent from './NoteDisplayComponent';
 import NotesComponent from './NotesComponent';
 import { MDBBtn } from "mdbreact";
 
 
-class SessionComponent extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.end = React.createRef();
-        this.state = {
-           
-           course: this.props.location.state.detail
-        }
-    }
-
-    componentDidMount(){
-        this.setState({
-           
-    })
-    }
+const SessionComponent = (props) => {
 
     
+        
+       
+    
+    const [course, setCourse] = useState(props.location.state.detail);
+   
 
-    render() {
         return (
             <div className="display-column">
                 Session
@@ -36,12 +25,10 @@ class SessionComponent extends React.Component {
                     <div className="text-center bg-primary p-3 text-light" id="numberNotes"></div>
                 </div>
                 <br/><br/>
-                    <div className="container-fluid "><div className="row"><div className="col-4 ">
-                        <div>img</div>
-                    </div>
-                    <NoteDisplayComponent user_course={this.state.course} />
+                    <div className="container-fluid "><div className="row">
+                    <NoteDisplayComponent user_course={course} />
                    
-                    <NotesComponent notes={this.state.notes}/>
+                    <NotesComponent/>
                     
         </div></div>
 
@@ -50,6 +37,6 @@ class SessionComponent extends React.Component {
             </div>
         );
     }
-}
+
 
 export default SessionComponent;

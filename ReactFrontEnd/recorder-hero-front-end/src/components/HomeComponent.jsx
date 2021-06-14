@@ -1,47 +1,23 @@
-import * as React from "react";
-import AuthenticationService from "../services/AuthenticationService";
+import  React from "react";
 import MenuComponent from './MenuComponent';
-import { Link, withRouter } from 'react-router-dom'
-import NonFixedNavbarExample from './MenuComponent'
-
-class HomeComponent extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-           
-        }
-        
-      
-        this.componentDidMount = this.componentDidMount.bind(this);
-    }
-
-    componentDidMount(){
-        this.setState({
-            logedinuser: AuthenticationService.getLoggedInUserName(),
-			logedinroles: AuthenticationService.getLoggedInUserRoles()
-    })
+import { Link } from 'react-router-dom';
+import UserService from '../ServicesNew/UserService';
+import {useSelector} from 'react-redux';
 
 
-        
-       
-    }
+const HomeComponent = () => {
 
-   
-
-   
-
-    render() {
-        return (
-            <div className="display-column">
+	const { courses } = useSelector((state) => state);
+    
+		 return (
+			  
+			
+				<div className="display-column">
+				
                 <MenuComponent />
 				
-              Home
-              <div>Logged in User</div>
-                <div>{this.state.logedinuser}</div>
-                <div>{this.state.logedinroles}</div>
-              
-
+              Home @@@@ {courses && <div>{courses.courses}</div>}
+			Logged in user: {UserService.getUsername()}
 
                 
 
@@ -71,7 +47,7 @@ class HomeComponent extends React.Component {
 				 <dd>
 					A set of five parallel lines where notes are written
 					<div className="row w-50  mx-auto d-block">
-						<img src="images/Staff.png" className="img-thumbnail "/>
+						<img src="images/Staff.png" className="img-thumbnail " alt="Staff"/>
 					</div>
 				 </dd>
 				 <dt>
@@ -106,7 +82,7 @@ class HomeComponent extends React.Component {
 				<dd>
 				   Sets G on the second line
 				   <div className="row w-50  mx-auto d-block">
-					<img src="images/trebleG.jpg" className="img-thumbnail "/></div>
+					<img src="images/trebleG.jpg" className="img-thumbnail " alt="Treble Clef"/></div>
 				</dd></li>
 			<li>	<dt>
 					Bass Clef
@@ -114,7 +90,7 @@ class HomeComponent extends React.Component {
 				<dd>
 				   Sets F on the fourth line
 				   <div className="row w-50  mx-auto d-block">
-					<img src="images/bassF.jpg" className="img-thumbnail "/></div>
+					<img src="images/bassF.jpg" className="img-thumbnail " alt="Bass Clef"/></div>
 				</dd></li>
 			<li>	<dt>
 					Alto Clef
@@ -122,7 +98,7 @@ class HomeComponent extends React.Component {
 				<dd>
 				   Sets C on the third line
 				   <div className="row w-50  mx-auto d-block">
-					<img src="images/altoC.jpg" className="img-thumbnail "/></div>
+					<img src="images/altoC.jpg" className="img-thumbnail " alt="Alto Clef"/></div>
 				</dd></li>
 			<li>	<dt>
 					Tenor Clef
@@ -130,7 +106,7 @@ class HomeComponent extends React.Component {
 				<dd>
 				   Sets C on the fourth line
 				   <div className="row w-50  mx-auto d-block">
-					<img src="images/tenorC.jpg" className="img-thumbnail "/></div>
+					<img src="images/tenorC.jpg" className="img-thumbnail " alt="Tenor Clef"/></div>
 				</dd></li>
 			</ul>
 			</dl>
@@ -181,32 +157,32 @@ class HomeComponent extends React.Component {
 				 <ul >
 					 <li>
 				 <dt>
-					<img className="star" src="images/star.svg"/>
+					<img className="star" src="images/star.svg" alt="star"/>
 					
 				</dt>
 				<dd>
 				  Get a note correct at least 5 times with an average speed of less than 5 seconds in a run with at least 3 notes.
 				</dd></li>
 			<li>	<dt>
-					<img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/>
+					<img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/>
 				</dt>
 				<dd>
 				 Get a note correct at least 5 times with an average speed of less than 3 seconds in a run with at least 5 notes.
 				</dd></li>
 			<li>	<dt>
-					<img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/>
+					<img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/>
 				</dt>
 				<dd>
 				  Get a note correct at least 5 times with an average speed of less than 2 seconds in a run with at least 7 notes.
 				</dd></li>
 			<li>	<dt>
-					<img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/>
+					<img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/>
 				</dt>
 				<dd>
 				  Get a note correct at least 5 times with an average speed of less than 1 second in a run with at least 15 notes.
 				</dd></li>
 			<li>	<dt>
-					<img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/><img className="star" src="images/star.svg"/>
+					<img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/><img className="star" src="images/star.svg" alt="star"/>
 				</dt>
 				<dd>
 				 Get a note correct at least 5 times with an average speed of less than &frac12; a second in a run with at least 25 notes.
@@ -221,10 +197,26 @@ class HomeComponent extends React.Component {
 
 
 
-
             </div>
-        );
+       
+			
+
+
+
+
+
+
+
+
+
+
+
+			);
+		 
+
+
+       
     }
-}
+
 
 export default HomeComponent;

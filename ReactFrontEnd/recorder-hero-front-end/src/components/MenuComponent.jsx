@@ -1,30 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBCollapse, MDBNavItem, MDBNavLink, MDBIcon, MDBContainer } from 'mdbreact';
-import { BrowserRouter as Router } from 'react-router-dom';
 import { Link, withRouter } from 'react-router-dom';
 import { MDBDropdown, MDBBtn, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
-import AuthenticationService from '../services/AuthenticationService';
+import UserService from '../ServicesNew/UserService';
 
-class MenuComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapse: false,
-      
-    };
-    this.onClick = this.onClick.bind(this);
+
+
+const MenuComponent = () => {
+
+  const [collapse, setCollapse] = useState(false);
+
+  const onClickThing = () => {
+    setCollapse(!collapse);
   }
 
   
-
-  onClick() {
-    this.setState({
-      collapse: !this.state.collapse,
-    });
-  }
-
-  render() {
-    const container = { height: 1300 }
     return (
       <div>
         
@@ -33,8 +23,8 @@ class MenuComponent extends React.Component {
               <MDBNavbarBrand href="/home">
                 <strong>RecorderHeroLogo</strong>
               </MDBNavbarBrand>
-              <MDBNavbarToggler onClick={this.onClick} />
-              <MDBCollapse isOpen={this.state.collapse} navbar>
+              <MDBNavbarToggler onClick={() => onClickThing()} />
+              <MDBCollapse isOpen={collapse} navbar>
                 <MDBNavbarNav left>
                   <MDBNavItem >
                     
@@ -84,7 +74,7 @@ class MenuComponent extends React.Component {
       </MDBDropdownToggle>
       
                   </MDBNavItem>
-                  {AuthenticationService.getLoggedInUserRoles().includes("ADMIN") &&
+                 
                   <MDBNavItem>
       <MDBDropdownToggle  color="default">
       <Link className="text-white" to="/admin">ADMIN</Link>
@@ -93,7 +83,7 @@ class MenuComponent extends React.Component {
                   </MDBNavItem>}
                   <MDBNavItem>
       <MDBDropdownToggle  color="default">
-      <Link className="text-white" to="/logout" onClick={AuthenticationService.logout}>Logout</Link>
+      <Link className="text-white" to="/logout" onClick={() => UserService.doLogout()}>Logout</Link>
       </MDBDropdownToggle>
       
                   </MDBNavItem>
@@ -117,6 +107,6 @@ class MenuComponent extends React.Component {
       </div>
     );
   }
-}
+
 
 export default withRouter(MenuComponent);

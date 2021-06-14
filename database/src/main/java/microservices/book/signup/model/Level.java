@@ -28,6 +28,6 @@ public class Level {
     private int maxStar;
     @ManyToOne
     private Part part;
-    @ManyToOne
-    private Challenges challenge;
+
+    private String challengeCode;
 }

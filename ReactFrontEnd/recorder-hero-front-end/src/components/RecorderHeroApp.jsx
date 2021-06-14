@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoginComponent from './LoginComponent';
-import LogoutComponent from './LogoutComponent';
 import CoursesComponent from './CoursesComponent';
 import StatsSummaryComponent from './StatsSummaryComponent';
 import RewardsComponent from './RewardsComponent';
@@ -15,40 +14,46 @@ import RunSummaryComponent from './RunSummaryComponent';
 import ShopComponent from './ShopComponent';
 import AdminComponent from './AdminComponent';
 
-import AuthenticatedRoute from './AuthenticatedRoute';
+
 import HomeComponent from './HomeComponent';
+import PrivateRoute from '../utilities/PrivateRoute';
 
-class RecorderHeroApp extends Component {
 
-    render() {
+
+
+
+
+
+
+ const RecorderHeroApp = () => {
+
+    
+    
         return (
-            <>
-                <Router>
-                    <>
-                        
-                        <Switch>
-                            <Route path="/" exact component={LoginComponent} />
-                            <Route path="/login" exact component={LoginComponent} />
-                            <AuthenticatedRoute path="/logout" exact component={LogoutComponent} />
-                            <AuthenticatedRoute path="/home" exact component={HomeComponent} />
-                            <AuthenticatedRoute path="/courses" exact component={CoursesComponent} />
-                            <AuthenticatedRoute path="/customrun" exact component={CustomRunComponent} />
-                            <AuthenticatedRoute path="/achievements" exact component={AchievementsComponent} />
-                            <AuthenticatedRoute path="/stats" exact component={StatsSummaryComponent} />
-                            <AuthenticatedRoute path="/rewards" exact component={RewardsComponent} />
-                            <AuthenticatedRoute path="/session" exact component={SessionComponent} />
-                            <AuthenticatedRoute path="/runsummary" exact component={RunSummaryComponent} />
-                            <AuthenticatedRoute path="/report" exact component={ReportGeneratorComponent} />
-                            <AuthenticatedRoute path="/rankings" exact component={AchievementsRankingsComponent} />
-                            <AuthenticatedRoute path="/challengerankings" exact component={ChallengeRankingsComponent} />
-                            <AuthenticatedRoute path="/shop" exact component={ShopComponent} />
-                            <AuthenticatedRoute path="/admin" exact component={AdminComponent} />
-                        </Switch>
-                    </>
-                </Router>
-            </>
+          
+    <Router>
+      <Switch>
+      <Route exact path="/" component={LoginComponent} />
+                            <PrivateRoute path="/home" exact component={HomeComponent} />
+                            <PrivateRoute path="/courses" exact component={CoursesComponent} />
+                            <PrivateRoute path="/customrun" exact component={CustomRunComponent} />
+                            <PrivateRoute path="/achievements" exact component={AchievementsComponent} />
+                            <PrivateRoute path="/stats" exact component={StatsSummaryComponent} />
+                            <PrivateRoute path="/rewards" exact component={RewardsComponent} />
+                            <PrivateRoute path="/session" exact component={SessionComponent} />
+                            <PrivateRoute path="/runsummary" exact component={RunSummaryComponent} />
+                            <PrivateRoute path="/report" exact component={ReportGeneratorComponent} />
+                            <PrivateRoute path="/rankings" exact component={AchievementsRankingsComponent} />
+                            <PrivateRoute path="/challengerankings" exact component={ChallengeRankingsComponent} />
+                            <PrivateRoute path="/shop" exact component={ShopComponent} />
+                            <PrivateRoute path="/admin" exact component={AdminComponent} />
+                            </Switch>
+    </Router>
+    
+  
+           
         )
     }
-}
+
 
 export default RecorderHeroApp

@@ -1,12 +1,12 @@
 
-import { instance } from './AuthenticationService'
+
+import HttpService from "../ServicesNew/HttpService";
 
 class LibraryApiClient{
 
-    static SERVER_URL = 'http://localhost:8181';
+    static SERVER_URL = 'http://localhost:8082';
     static GET_UNFINISHED_COURSES = '/progress/hasunfinishedcourse?username=';
     static GET_USER_COURSES = '/progress/courses?username=';
-    static GET_USER_SESSIONS = '/sessions/';
 
 
     
@@ -14,18 +14,13 @@ class LibraryApiClient{
     
 
     static hasUnfinishedCourse(username){
-        var a = instance;
-        return instance.get(LibraryApiClient.SERVER_URL + LibraryApiClient.GET_UNFINISHED_COURSES + username);
+        let axios = HttpService.getAxiosClient;
+        return axios.get(LibraryApiClient.SERVER_URL + LibraryApiClient.GET_UNFINISHED_COURSES + username);
     }
 
     static getUserCourses(username){
-        return instance.get(LibraryApiClient.SERVER_URL + LibraryApiClient.GET_USER_COURSES + username);
+        return HttpService.getAxiosClient.get(LibraryApiClient.SERVER_URL + LibraryApiClient.GET_USER_COURSES + username);
     }
-    static getUserSessions(username){
-        return instance.get('http://localhost:8080/sessions/search/findByUserUsername?username='  + username );
-    }
-
-   
 
    
 

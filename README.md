@@ -10,12 +10,14 @@ Technologies Used
 <img src="/TechnologiesUsedImages/javascript-seeklogo.com.svg" width="200" height="180">
 <img src="/TechnologiesUsedImages/mdb-react2.png" width="200"  height="200">
 <img src="/TechnologiesUsedImages/bootstrap.svg" width="200" height="200">
+<img src="/TechnologiesUsedImages/redux.svg" width="200" height="200" >
 <img src="/TechnologiesUsedImages/vexflow2.PNG" width="200" height="200" >
 <img src="/TechnologiesUsedImages/highcharts.png" width="200" height="200" >
 </br></br>
 <b>Back End</b> - Spring boot, Java</br>
 <img src="/TechnologiesUsedImages/springboot.png" width="200" height="180">
 <img src="/TechnologiesUsedImages/java.svg" width="200" height="200">
+<img src="/TechnologiesUsedImages/mariadb.svg" width="200" height="200" >
 </br></br>
 <b>Security</b> - Spring Security, Keycloak, Oauth2</br>
 <img src="/TechnologiesUsedImages/spring_security.png" width="200" height="200">

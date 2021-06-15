@@ -4,7 +4,7 @@ React, Spring Boot Security, Rest, Microservices
 Technologies Used
 
 <b>Front End</b> - React, CSS, HTML, JavaScript, MDBReact, Bootstrap, Vexflow, Highcharts
-</br>
+</br></br>
 <img src="/TechnologiesUsedImages/Reactjs-icon-vector-01.svg" width="200" height="200">
 <img src="/TechnologiesUsedImages/CSS3_and_HTML5_logos_and_wordmarks.svg" width="350" height="200">
 <img src="/TechnologiesUsedImages/javascript-seeklogo.com.svg" width="200" height="180">

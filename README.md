@@ -11,7 +11,7 @@ Technologies Used
 <img src="/TechnologiesUsedImages/javascript-seeklogo.com.svg" width="200" height="180">
 <img src="/TechnologiesUsedImages/mdbreact.png" width="200" height="140">
 <img src="/TechnologiesUsedImages/bootstrap.jpg" width="200" height="200">
-<img src="/TechnologiesUsedImages/vexflow.PNG" width="200" height="120">
+<img src="/TechnologiesUsedImages/vexflow.PNG" width="200" >
 </br></br>
 <b>Back End</b></br>
 <img src="/TechnologiesUsedImages/springboot.png" width="200" height="180">

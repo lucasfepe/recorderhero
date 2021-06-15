@@ -11,7 +11,7 @@ Technologies Used
 <img src="/TechnologiesUsedImages/javascript-seeklogo.com.svg" width="200" height="200">
 </br></br>
 <b>Back End</b></br>
-<img src="/TechnologiesUsedImages/springboot.png" width="200" height="100">
+<img src="/TechnologiesUsedImages/springboot.png" width="200" height="200">
 <img src="/TechnologiesUsedImages/java.svg" width="200" height="200">
 </br></br>
 <b>Security</b></br>

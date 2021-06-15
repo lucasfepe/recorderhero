@@ -3,7 +3,7 @@ Web Application that helps recorder players improve their sight reading level.
 
 Technologies Used
 
-<b>Front End</b> - React, CSS, HTML, JavaScript, MDBReact, Bootstrap, Vexflow, Highcharts
+<b>Front End</b> - React, CSS, HTML, JavaScript, MDBReact, Bootstrap, Redux, Vexflow, Highcharts
 </br></br>
 <img src="/TechnologiesUsedImages/Reactjs-icon-vector-01.svg" width="200" height="200">
 <img src="/TechnologiesUsedImages/CSS3_and_HTML5_logos_and_wordmarks.svg" width="350" height="200">
@@ -14,7 +14,7 @@ Technologies Used
 <img src="/TechnologiesUsedImages/vexflow2.PNG" width="200" height="200" >
 <img src="/TechnologiesUsedImages/highcharts.png" width="200" height="200" >
 </br></br>
-<b>Back End</b> - Spring boot, Java</br>
+<b>Back End</b> - Spring boot, Java, Mariadb</br>
 <img src="/TechnologiesUsedImages/springboot.png" width="200" height="180">
 <img src="/TechnologiesUsedImages/java.svg" width="200" height="200">
 <img src="/TechnologiesUsedImages/mariadb.svg" width="200" height="200" >

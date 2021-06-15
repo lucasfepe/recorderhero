@@ -10,7 +10,7 @@ Technologies Used
 <img src="/TechnologiesUsedImages/javascript-seeklogo.com.svg" width="200" height="180">
 <img src="/TechnologiesUsedImages/mdbreact.png" width="300" >
 <img src="/TechnologiesUsedImages/bootstrap.svg" width="200" height="200">
-<img src="/TechnologiesUsedImages/vexflow2.PNG" width="200" >
+<img src="/TechnologiesUsedImages/vexflow2.PNG" width="200"height="200" >
 <img src="/TechnologiesUsedImages/highcharts.png" width="200" height="200" >
 </br></br>
 <b>Back End</b></br>

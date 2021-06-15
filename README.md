@@ -1,5 +1,5 @@
 # recorderhero
-React, Spring Boot Security, Rest, Microservices
+Web Application that helps recorder players improve their sight reading level.
 
 Technologies Used
 

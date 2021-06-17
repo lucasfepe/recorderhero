@@ -18,7 +18,7 @@ Technologies Used
 <img src="/TechnologiesUsedImages/springboot.png" width="200" height="180">
 <img src="/TechnologiesUsedImages/java.svg" width="200" height="200">
 <img src="/TechnologiesUsedImages/mariadb.svg" width="200" height="200" >
-<img src="/TechnologiesUsedImages/springcloudvector.png" width="200" height="200" >
+<img src="/TechnologiesUsedImages/springcloudvector.svg" width="200" height="200" >
 <img src="/TechnologiesUsedImages/netflixeureka.png" width="200"  >
 </br></br>
 <b>Security</b> - Spring Security, Keycloak, Oauth2</br>

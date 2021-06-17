@@ -3,7 +3,7 @@ Web Application that helps recorder players improve their sight reading level.
 
 App Architecture
 
-<img src="/TechnologiesUsedImages/Slide1.jpg" >
+<img src="/TechnologiesUsedImages/Slide2.jpg" >
 
 
 

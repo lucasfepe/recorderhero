@@ -1,6 +1,12 @@
 # recorderhero
 Web Application that helps recorder players improve their sight reading level.
 
+App Architecture
+
+<img src="/TechnologiesUsedImages/Presentation.pdf" >
+
+
+
 Technologies Used
 
 <b>Front End</b> - React, CSS, HTML, JavaScript, MDBReact, Bootstrap, Redux, Vexflow, Highcharts

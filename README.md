@@ -1,5 +1,10 @@
 # recorderhero
-Web Application that helps recorder players improve their sight reading level.
+Web Application that helps recorder players improve their sight reading skills.
+
+Features:
+ - Social or database login
+ - Secure data storage and access
+ - RESTful microservice architecture
 
 App Architecture
 

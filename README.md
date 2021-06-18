@@ -4,6 +4,7 @@ Web Application that helps recorder players improve their sight reading skills.
 Features:
  - Social or database login
  - Secure data storage and access
+ - Role based content display
  - RESTful microservice architecture
 
 App Architecture

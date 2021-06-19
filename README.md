@@ -1,11 +1,7 @@
 # recorderhero
 Web Application that helps recorder players improve their sight reading skills.
 
-Features:
- - Social or database login
- - Secure data storage and access
- - Role based content display
- - RESTful microservice architecture
+
 
 App Architecture
 
@@ -38,4 +34,10 @@ Technologies Used
 <img src="/TechnologiesUsedImages/keycloak.png" width="200" height="200" >
 <img src="/TechnologiesUsedImages/oauth2_logo.svg" width="200" height="200">
 
+Features:
+ - Social or database login
+ - Secure data storage and access
+ - Role based content display
+ - RESTful microservice architecture
+ - Authentication token will only fetch data for a single user
 

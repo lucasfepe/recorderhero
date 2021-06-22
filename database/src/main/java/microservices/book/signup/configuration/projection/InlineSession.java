@@ -15,8 +15,7 @@ public interface InlineSession {
     long getStartTime();
     long getEndTime();
     User getUser();
-    String getHighNote();
-    String getLowNote();
+    String getLowNote();w
     Clef getClef();
     Mode getMode();
     Key getKeym();

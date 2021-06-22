@@ -1,9 +1,8 @@
 import React, { Fragment, useState } from "react";
-import AuthenticationService from "../Keycloak";
-import MenuComponent from './MenuComponent';
+
 import NoteDisplayComponent from './NoteDisplayComponent';
 import NotesComponent from './NotesComponent';
-import { MDBBtn } from "mdbreact";
+
 
 
 const SessionComponent = (props) => {

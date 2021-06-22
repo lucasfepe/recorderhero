@@ -5,7 +5,7 @@ import { MDBBtn } from "mdbreact";
 import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { generateAccidentals, endGame } from "../modules/Accidentals";
+import { generateAccidentals, endGame } from "../modules/accidentals";
 
 
 

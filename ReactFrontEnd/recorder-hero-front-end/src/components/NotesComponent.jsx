@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { getSessionStats } from '../modules/SessionStats'
+import { getSessionStats } from '../modules/sessionStats'
 import { MDBProgress } from 'mdbreact'
 
 

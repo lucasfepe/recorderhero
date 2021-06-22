@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import MenuComponent from './MenuComponent';
 import ScriptTag from 'react-script-tag';
-import { getReport } from "../modules/Report";
+import { getReport } from "../modules/report";
 
 import  Highcharts from "highcharts";
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';

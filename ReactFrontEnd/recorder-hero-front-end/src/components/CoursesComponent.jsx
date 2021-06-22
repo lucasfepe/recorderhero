@@ -2,7 +2,7 @@ import React, {  useEffect } from 'react'
 import MenuComponent from './MenuComponent';
 
 import { useDispatch, useSelector } from "react-redux";
-import { allCourses  } from "../modules/Courses";
+import { allCourses  } from "../modules/courses";
 import CourseStartComponent from "./CourseStartComponent";
 import UserService from '../ServicesNew/UserService'
 

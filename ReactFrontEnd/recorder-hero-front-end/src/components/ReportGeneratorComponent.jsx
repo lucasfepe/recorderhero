@@ -1,10 +1,10 @@
 import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allSessions  } from "../modules/Sessions";
+import { allSessions  } from "../modules/sessions";
 import UserService from "../ServicesNew/UserService";
 import MenuComponent from './MenuComponent';
 import { MDBBtn } from "mdbreact";
-import { getReport } from "../modules/Report";
+import { getReport } from "../modules/report";
 import  Highcharts from "highcharts";
 
 

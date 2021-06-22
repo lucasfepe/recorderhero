@@ -5,35 +5,49 @@ import UserService from '../ServicesNew/UserService';
 import {useSelector} from 'react-redux';
 
 
+
 const HomeComponent = () => {
 
 	const { courses } = useSelector((state) => state);
     
 		 return (
 			  
-			
-				<div className="display-column">
+			<>
+				<div className="home">
+					
+				<div className="home-inside">
 				
-                <MenuComponent />
-				
-              Home @@@@ {courses && <div>{courses.courses}</div>}
-			Logged in user: {UserService.getUsername()}
-
+				<MenuComponent />
                 
+				
+			<br/>
+				
+			
+				
 
-     <h1 className="text-center mt-5 display-1"><strong>Welcome to Note Training App!</strong></h1>
-	 <p className=" text-center lead">Learn musical notes and compete for the highest score!</p> 
+              
+			<div className=" pb-5 pt-2 w-50 rounded m">
+				
+     <h1 className="text-center mt-5 display-1"><strong>Welcome to Recorder Hero!</strong></h1>
+	 <p className=" text-center lead text-light">Learn musical notes and compete for the highest score!</p> 
 	 
 	 
-	 <div className="jumbotron">
+	 <div className="jumbotron w-50 ">
 	 <h3 className="text-center"></h3>
 	 <div className="d-flex justify-content-center">
-	 <Link className="" to="/courses">Courses</Link>
+	 <Link className="" to="/courses">My Courses</Link>
+
+	 <br/>
+	 
      
 	 </div>
 	 </div>
-     <br/><br/>
-	 <div className="container px-lg-5 bg-light border">
+     
+	 {UserService.hasRole(["developer"]) && <>
+	 <br/><div className="alert alert-success position-relative">Logged in user: {UserService.getUsername()}</div><br/>
+	 <div className="alert alert-success position-relative">Logged in user roles: {UserService.getRoles().roles.map(c => " " + c ).toString()}</div><br/>
+	 </>}
+	 {/* <div className="container px-lg-5 bg-light border">
 		
 		 <div className="row mx-lg-n5 ">
 			
@@ -192,18 +206,18 @@ const HomeComponent = () => {
 			</dl>
 		 </div>
 		</div>
-	 </div>
+	 </div> */}
 
 
-
+</div>
 
             </div>
        
-			
+			</div>
 
 
 
-
+</>
 
 
 

@@ -71,7 +71,7 @@ const LoginComponent = () => {
       {signupMessage && <div className="alert alert-success position-relative">{signupMessage}</div>}
 		
 		<div className="loginwrapper">
-		<button  type="button" className="home btn login btn-danger my-3" onClick={() => history.push("/home")}>Click to Enter</button>
+		<button  type="button" className="homebtn btn login btn-danger my-3" onClick={() => history.push("/home")}>Click to Enter</button>
         </div>
 		
   </Tab>

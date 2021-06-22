@@ -2,8 +2,9 @@ import React, {  useEffect } from 'react'
 import MenuComponent from './MenuComponent';
 
 import { useDispatch, useSelector } from "react-redux";
-import { allCourses  } from "../modules/courses";
+import { allCourses  } from "../modules/Courses";
 import CourseStartComponent from "./CourseStartComponent";
+import UserService from '../ServicesNew/UserService'
 
 
 
@@ -57,7 +58,7 @@ const CoursesComponent = () => {
             
         //   )
         // dispatch(allpoop('{"hi":"hi"}'))
-        dispatch(allCourses());
+        dispatch(allCourses(UserService.getUsername()));
 
     }, [])
     
@@ -68,13 +69,12 @@ const CoursesComponent = () => {
         return (
             <div className="display-column">
                 <MenuComponent />
-                <div>Logged in User</div>
+                <br/><br/><br/><br/><br/><br/>
                
-                <button onClick={() => {}}>do</button>
                 <div className="container  px-lg-5 bg-light border">
                     <br />
                     <div className="text-center">
-                        <img src="images/sopranoRecorder2.jpg" alt="..." className="img-thumbnail img-square" />
+                        <img src="image/descant.jpg" alt="..." className="img-thumbnail img-square" />
                     </div>
                     <h3 className="display-4 text-center my-3 ">Ongoing Courses</h3>
 

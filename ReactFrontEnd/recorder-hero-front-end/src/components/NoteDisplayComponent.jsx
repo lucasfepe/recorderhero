@@ -5,7 +5,7 @@ import { MDBBtn } from "mdbreact";
 import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { generateAccidentals, endGame } from "../modules/accidentals";
+import { generateAccidentals, endGame } from "../modules/Accidentals";
 
 
 
@@ -652,7 +652,7 @@ const NoteDisplayComponent = (props) => {
 			<h3 id="answer1" className="text-center"></h3>
 
 			
-			<div className="feedback bg-primary" ref={feedbackElem}></div>
+			<div className="feedback bg-primary " ref={feedbackElem}></div>
 		
 			<MDBBtn gradient="aqua" onClick={() => endClickedFunction()}>End</MDBBtn>
 

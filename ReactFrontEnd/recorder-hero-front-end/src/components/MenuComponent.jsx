@@ -16,12 +16,12 @@ const MenuComponent = () => {
 
   
     return (
-      <div>
+      <div className="menu">
         
-          <header>
+          <header >
             <MDBNavbar color="default-color" dark expand="md">
               <MDBNavbarBrand href="/home">
-                <strong>RecorderHeroLogo</strong>
+                <strong id="logo">RecorderHeroLogo</strong>
               </MDBNavbarBrand>
               <MDBNavbarToggler onClick={() => onClickThing()} />
               <MDBCollapse isOpen={collapse} navbar>
@@ -74,13 +74,16 @@ const MenuComponent = () => {
       </MDBDropdownToggle>
       
                   </MDBNavItem>
+                 {UserService.hasRole(["developer"]) && 
+                 <MDBNavItem>
+                 <MDBDropdownToggle  color="default">
+                  <Link className="text-white" to="/admin">ADMIN</Link>
+                 </MDBDropdownToggle>
                  
-                  <MDBNavItem>
-      <MDBDropdownToggle  color="default">
-      <Link className="text-white" to="/admin">ADMIN</Link>
-      </MDBDropdownToggle>
-      
-                  </MDBNavItem>}
+                             </MDBNavItem>
+                 }
+                  
+
                   <MDBNavItem>
       <MDBDropdownToggle  color="default">
       <Link className="text-white" to="/logout" onClick={() => UserService.doLogout()}>Logout</Link>

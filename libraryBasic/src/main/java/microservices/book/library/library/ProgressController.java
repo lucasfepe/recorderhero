@@ -4,9 +4,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import microservices.book.library.client.GameDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.core.env.Environment;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Optional;
 
 
@@ -21,27 +25,28 @@ public class ProgressController {
     @Autowired
     Environment env;
 
-    @GetMapping("/hasunfinishedcourse")
-    boolean userHasUnifishedCourse(@RequestParam("username") String username) {
-        Optional<Boolean> hasUnfinishedCourse = userProgressService.isCourseUnfinished(username);
-        log.info("User {} has unfinished course: {}", username, hasUnfinishedCourse);
-
-        return hasUnfinishedCourse.orElseGet(() -> { return null; });
-    }
+//    @GetMapping("/hasunfinishedcourse")
+//    boolean userHasUnifishedCourse(@RequestParam("username") String username) {
+//        Optional<Boolean> hasUnfinishedCourse = userProgressService.isCourseUnfinished(username);
+//        log.info("User {} has unfinished course: {}", username, hasUnfinishedCourse);
+//
+//        return hasUnfinishedCourse.orElseGet(() -> { return null; });
+//    }
 
     @GetMapping("/courses")
-    String getUserCoursesForUser(@RequestParam("username") String username) {
-        String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username);
-        log.info("User {} has retrieved course list", username);
+    String getUserCoursesForUser(@RequestParam("username") String username, @AuthenticationPrincipal Jwt jwt) {
 
-        return userCoursesJson;
+        String usernameV = jwt.getClaim("preferred_username");
+        if(username.equals(usernameV)) {
+            String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username);
+            log.info("User {} has retrieved course list", username);
+
+            return userCoursesJson;
+        }else{
+            return null;
+        }
 //                "Working on port: " + env.getProperty("local.server.port");
 
     }
-    @PostMapping("/courses")
-    String ji(@RequestBody String gameDTO) {
-        log.info("Ji@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-       return "{\"ji\":\"ji\"}";
-
-    }
+  
 }

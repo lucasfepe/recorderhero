@@ -23,11 +23,11 @@ const coursesReducer = (state = [], action) => {
 
 export default coursesReducer;
 
-export const allCourses = () => ({
+export const allCourses = (username) => ({
   type: LIST_COURSES,
   payload: {
     request: {
-      url: '/progress/courses?username=ma',
+      url: '/progress/courses?username=' + username,
     },
   },
 });

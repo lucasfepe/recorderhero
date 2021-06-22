@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import MenuComponent from './MenuComponent';
 import ScriptTag from 'react-script-tag';
-import { getReport } from "../modules/report";
+import { getReport } from "../modules/Report";
 
 import  Highcharts from "highcharts";
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
@@ -174,10 +174,7 @@ Highcharts.chart('container2', {
         //generate reports
         
         
-    const hi = () =>{
-        console.log("a");
-    }
-
+   
  
         
         return (
@@ -186,9 +183,11 @@ Highcharts.chart('container2', {
                 <MenuComponent />
                 <ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/highcharts.js" />
                 <ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/modules/exporting.js" />
+               
                 <div className="container">
-			<h2 align="center">Session Summary</h2>
-            <button onClick={() => hi()}>Hi</button>
+                    <br/>
+			<h2 align="center ">Session Summary</h2>
+          
 
 			<div id="container"
 				>
@@ -196,14 +195,14 @@ Highcharts.chart('container2', {
                 </div>
 		</div>
 		<div className="container2">
-			<h2 align="center">Reaction Time</h2>
+			<h2 align="center ">Reaction Time</h2>
 
 			<div id="container2"
 				>
                     <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
                 </div>
-		</div>
-            </div>
+		</div></div>
+          
         );
     
 

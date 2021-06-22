@@ -17,6 +17,11 @@ h1#welcome{
 .login{
 
 }
+
+h1{
+  font-family: 'Indie Flower', cursive;
+  color: #15f384;
+}
 /* input{
   width:100px !important;
 } */
@@ -32,7 +37,16 @@ h1#welcome{
   background: url("./img/bunting-flag.png") repeat center center fixed;
 }
 
+.course-start-comp{
+  text-align:center;
+}
+*{
+  flex-grow: 0 !important;
+}
 
+header{
+  margin:auto;
+}
 
 body {
   margin: 0;
@@ -47,7 +61,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+#container, #container2{
+  text-align: center;
+}
 .lds-roller {
   display: inline-block;
   position: relative;

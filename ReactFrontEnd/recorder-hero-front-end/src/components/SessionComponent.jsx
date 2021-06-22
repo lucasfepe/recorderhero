@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import AuthenticationService from "../keycloak";
+import AuthenticationService from "../Keycloak";
 import MenuComponent from './MenuComponent';
 import NoteDisplayComponent from './NoteDisplayComponent';
 import NotesComponent from './NotesComponent';
@@ -17,15 +17,15 @@ const SessionComponent = (props) => {
 
         return (
             <div className="display-column">
-                Session
+                
 
 
-                <div id="hidden" >
+                <div className="hidden" >
                     <div className="text-center">Notes Left:</div>
                     <div className="text-center bg-primary p-3 text-light" id="numberNotes"></div>
                 </div>
                 <br/><br/>
-                    <div className="container-fluid "><div className="row">
+                    <div className="container-fluid text-center"><div className="row">
                     <NoteDisplayComponent user_course={course} />
                    
                     <NotesComponent/>

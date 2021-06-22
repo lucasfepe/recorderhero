@@ -1,10 +1,10 @@
 import React, {  useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { allSessions  } from "../modules/sessions";
+import { allSessions  } from "../modules/Sessions";
 import UserService from "../ServicesNew/UserService";
 import MenuComponent from './MenuComponent';
 import { MDBBtn } from "mdbreact";
-import { getReport } from "../modules/report";
+import { getReport } from "../modules/Report";
 import  Highcharts from "highcharts";
 
 
@@ -143,30 +143,32 @@ const ReportGeneratorComponent = () => {
         return (
             <div className="display-column">
                 <MenuComponent />
-                ReportGeneratorComponent
-                <select value={value} onChange={onChange} className="browser-default custom-select">
+                <br/><br/><br/><br/>
+                <select value={value} onChange={onChange} className="browser-default custom-select select-small">
+                    
                 <option>Choose your option</option>
                     {sessions.map(c => <option value={c.id} key={c.id}>{new Date(c.startTime).toString()}</option>)}
           
         </select>
+        <br/>
         <MDBBtn value="practice" gradient="aqua" onClick={generateReport}>Generate Report</MDBBtn>
+        <br/>
         <div className="container">
 			<h2 align="center">Session Summary</h2>
            
 
 			<div id="container"
 				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
+                    <img src="image/chartplaceholder.png" alt="..." className="img-thumbnail img-square" />
 		</div>
+        </div>
 		<div className="container2">
 			<h2 align="center">Reaction Time</h2>
 
 			<div id="container2"
-				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
-		</div>
+				><img src="image/chartplaceholder.png" alt="..." className="img-thumbnail img-square" />
+                  
+		</div></div>
             </div>
         );
     

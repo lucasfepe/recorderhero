@@ -1,12 +1,15 @@
 import { applyMiddleware, compose, createStore } from "redux";
+// import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import axiosMiddleware from "redux-axios-middleware";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import rootReducer from "../modules";
+import rootReducer from "../modules/Index";
 import HttpService from "./HttpService";
 
 const setup = () => {
-  const enhancers = [ window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()];
+  const enhancers = [ 
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  ];
   const middleware = [
     thunk,
     axiosMiddleware(HttpService.getAxiosClient())

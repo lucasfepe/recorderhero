@@ -1,44 +1,23 @@
 import * as React from "react";
-import AuthenticationService from "../keycloak";
+import AuthenticationService from "../Keycloak";
 import MenuComponent from './MenuComponent';
+import UserService from '../ServicesNew/UserService';
 
 
-class AdminComponent extends React.Component {
+const AdminComponent = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-           
-        }
-        
-      
-        this.componentDidMount = this.componentDidMount.bind(this);
-    }
-
-    componentDidMount(){
-        this.setState({
-           
-    })
-        
-       
-    }
-
-   
-
-   
-
-    render() {
+ 
         return (
             <div className="display-column">
                 <MenuComponent />
                 Admin Page
-                {AuthenticationService.getLoggedInUserRoles().includes("ADMIN") && <span>ADMIN CONTENT ONLY</span>}
+                {UserService.hasRole(["developer"]) ? <span>ADMIN CONTENT ONLY</span> : <span>You are not an admin and shouldn't be here</span>}
 
-                {!AuthenticationService.getLoggedInUserRoles().includes("ADMIN") && <span>If you are not an admin you shouldn't be here</span>}
+                
 
             </div>
         );
     }
-}
+
 
 export default AdminComponent;

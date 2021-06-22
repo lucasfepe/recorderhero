@@ -11,6 +11,90 @@
 	line-height: 19px;
 	
 }
+.home{
+	position:relative;
+	
+}
+.select-small{
+	width:30%;
+}
+h2{
+	color:#a3a3a3;
+	font-family: 'Indie Flower', cursive;
+}
+#logo{
+	color: #15f384;
+	font-family: 'Indie Flower', cursive;
+	font-size:30px;
+}
+.default-color{
+	background-color:#a3a3a3 !important;
+}
+.btn-default, .btn-default.dropdown-toggle{
+	background-color:#15f384 !important;
+}
+.home::before{
+	
+	content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("./img/ladyrecorder.jpg");
+  background-size:cover;
+  /* filter:  */
+
+	height:100vh;
+	
+}
+.home-inside{
+	display:flex;
+	align-items:center;	
+	flex-wrap:wrap;
+	position: relative;
+	width:100%;
+	height: 100vh;
+}
+p{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
+.menu{
+flex-basis:100%;
+position: absolute;
+top: 0px;
+width: 100%;
+
+
+}
+
+
+.pb-5.pt-2.w-50.rounded{
+	margin:auto;
+	/* background: white; */
+	/* box-shadow: 10px 5px 5px #333;  */
+	backdrop-filter: blur(10px);
+	
+	
+}
+
+.jumbotron{
+	margin:auto;
+	padding: 2rem 3rem;
+	font-family: 'Rowdies', cursive;
+    font-size: 30px !important;
+    text-transform: uppercase;
+	text-align: center;
+	
+}
+
+.navbar{
+	justify-content: center;
+	text-align: center;
+}
+nav{
+	text-align: center;
+}
+
+body{
+	/* background-color:#666; */
+}
 
 .App {
   text-align: center;
@@ -170,6 +254,7 @@ th {
 	height: 70px;
 	border-radius: 40px;
 	transition:  0.2s linear !important;
+	margin:auto;	
 }
 .buttonText{
     margin: 0 !important;
@@ -404,7 +489,7 @@ margin: 0.5em;}
  	width: 100px !important;
  	height: 100px !important;
  }
-  .home.btn{
+  .homebtn.btn{
 	  padding:1em 0em !important;
 	  width: 70%;
 	  height: auto;
@@ -415,7 +500,7 @@ margin: 0.5em;}
 	  
 	  
   }
-  .home.btn.login{
+  .homebtn.btn.login{
 	 margin-top:50% !important;
   }
   .btnSize{

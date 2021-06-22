@@ -28,6 +28,8 @@ const doLogout = _kc.logout;
 
 const getToken = () => _kc.token;
 
+const getRoles = () => _kc.realmAccess;
+
 const isLoggedIn = () => !!_kc.token;
 
 const updateToken = (successCallback) =>
@@ -48,6 +50,7 @@ const UserService = {
   updateToken,
   getUsername,
   hasRole,
+  getRoles
 };
 
 export default UserService;

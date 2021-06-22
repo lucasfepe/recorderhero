@@ -16,11 +16,11 @@ const CourseStartComponent = (props) => {
 
     
         return (
-            <div key={props.user_course.course.clef} className="py-1 this.props.user_course justify-content-center rounded">
+            <div key={props.user_course.course.clef} className="py-1 this.props.user_course justify-content-center rounded course-start-comp">
 
                 <label htmlFor="inputEmail3" className=" col-form-label col-xs-7 col-lg-4 col-xl-4 col-sm-7 col-md-5 ">
-                    <span  >{props.user_course.course.instrument.toLowerCase()} </span>
-                      in <span >{props.user_course.course.clef} </span>
+                    <span  >{props.user_course.course.instrument.toLowerCase().split("_").map(c => c.charAt(0).toUpperCase() + c.slice(1) + " ")} </span>
+                      in <span >{props.user_course.course.clef.charAt(0) + props.user_course.course.clef.slice(1).toLowerCase()} </span>
                         clef
                     Level {props.user_course.level.level}
                 </label>

@@ -58,7 +58,8 @@ const CoursesComponent = () => {
             
         //   )
         // dispatch(allpoop('{"hi":"hi"}'))
-        dispatch(allCourses(UserService.getUsername()));
+       dispatch(allCourses(UserService.getUsername())).then(res => console.log(res));
+        
 
     }, [])
     

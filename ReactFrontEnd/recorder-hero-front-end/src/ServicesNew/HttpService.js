@@ -1,6 +1,8 @@
 import axios from "axios";
 import UserService from "./UserService";
 import axiosCookieJarSupport from 'axios-cookiejar-support'
+import https from 'https'
+
 
 
 import tough from 'tough-cookie'
@@ -16,7 +18,9 @@ const cookieJar = new tough.CookieJar();
 
 const _axios = axios.create({
   withCredentials: true,
-  jar: cookieJar});
+  jar: cookieJar,
+
+  httpsAgent: new https.Agent({ rejectUnauthorized: false, requestCert: true, keepAlive: true})});
 
 
 
@@ -28,6 +32,7 @@ const configure = () => {
   _axios.interceptors.request.use((config) => {
     if (UserService.isLoggedIn()) {
       const cb = () => {
+        
         config.headers.Authorization = `Bearer ${UserService.getToken()}`;
         return Promise.resolve(config);
       };

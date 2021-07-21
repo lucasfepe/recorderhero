@@ -186,7 +186,7 @@ Highcharts.chart('container2', {
                
                 <div className="container">
                     <br/>
-			<h2 align="center ">Session Summary</h2>
+			<h2 align="center" class="where">Session Summary</h2>
           
 
 			<div id="container"

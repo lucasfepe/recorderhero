@@ -5,7 +5,7 @@ import { MDBBtn } from "mdbreact";
 import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { generateAccidentals, endGame } from "../modules/accidentals";
+import { generateAccidentals, endGame, generateAccidentalsget } from "../modules/accidentals";
 
 
 
@@ -626,6 +626,7 @@ const NoteDisplayComponent = (props) => {
 	}, [numberOfAccidentals])
 
 	useEffect(() => {
+		
 		dispatch(generateAccidentals(props.user_course));
 	},[])
 

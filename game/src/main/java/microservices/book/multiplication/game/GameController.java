@@ -49,6 +49,17 @@ public class GameController {
     }
 
 
+
+
+    @GetMapping("/enumerate_accidentals")
+    String d() throws JsonProcessingException {
+
+
+
+        return "jkol";
+    }
+
+
     @PostMapping("/end_game")
     String archiveSession(@RequestBody GameDTO gameDTO) throws JsonProcessingException, InterruptedException {
 //        ObjectMapper objectMapper = new ObjectMapper();

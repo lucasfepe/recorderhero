@@ -598,7 +598,9 @@ const NoteDisplayComponent = (props) => {
 		var time_array_start_dto = [...time_array_start];
 		time_array_start_dto.pop();
 
-
+		dispatch({
+			type: 'CLEAR_ACCIDENTALS'
+		  })
 		dispatch(endGame(isChallenge, peeked_array, note_shown_array,
 			note_input_array, time_array_start_dto, time_array_end, numberOfAccidentals.sessionId))
 		
@@ -623,10 +625,11 @@ const NoteDisplayComponent = (props) => {
 		
 		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + numberOfAccidentals);
 	if(numberOfAccidentals.listOfEntries != null)vex()
+	console.log('i fire twice');
 	}, [numberOfAccidentals])
 
 	useEffect(() => {
-		
+		console.log('i fire once');
 		dispatch(generateAccidentals(props.user_course));
 	},[])
 

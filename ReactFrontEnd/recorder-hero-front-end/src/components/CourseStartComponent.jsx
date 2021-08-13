@@ -1,14 +1,22 @@
 import { MDBBtn } from "mdbreact";
 import {  withRouter } from 'react-router-dom';
 import * as React from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+
+
+
 
 
 const CourseStartComponent = (props) => {
 
+    const dispatch = useDispatch();
    
     
 
     const goClicked = (event) => {
+        dispatch({
+			type: 'CLEAR_REPORT'
+		  })
         props.user_course.challenge = event.target.value == "challenge" ? true:false;
         props.history.push({pathname:'/session',state: { detail: props.user_course }});
     }

@@ -191,16 +191,17 @@ Highcharts.chart('container2', {
 
 			<div id="container"
 				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
+                    <img src="image/chartplaceholderdata.png" alt="..." className="" />
+                     {/* <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+                </div> 
 		</div>
 		<div className="container2">
 			<h2 align="center ">Reaction Time</h2>
 
 			<div id="container2"
-				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
+				><img src="image/chartplaceholderdata.png" alt="..." className="" />
+                     {/* <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+                </div> 
 		</div></div>
           
         );

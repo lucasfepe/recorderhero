@@ -66,7 +66,7 @@ const LoginComponent = () => {
                 
              <Tabs  activeKey={key}
              onSelect={handleSelect}>
-  <Tab eventKey="login" title="Returning User">
+  <Tab eventKey="login" title="Returning User/Guest">
   
       {signupMessage && <div className="alert alert-success position-relative">{signupMessage}</div>}
 		
@@ -75,7 +75,7 @@ const LoginComponent = () => {
         </div>
 		
   </Tab>
-  <Tab eventKey="signup" title="First Timer? Sign Up Here!">
+  <Tab eventKey="signup" title="Sign Up Here!">
       
   
         
@@ -100,7 +100,7 @@ const LoginComponent = () => {
 			<input type="text" name="lastName"  className="text form-control" placeholder="last name" value={lastName} onChange={e => setLastName(e.target.value)} />
 		</div><div className="d-flex justify-content-around  align-items-center ">
 		
-			<button type="button"  className="home btn btn-danger my-3"  onClick={signUpClicked}>Sign Up</button>
+			<button type="button"  className="btn btn-danger my-3"  onClick={signUpClicked}>Sign Up</button>
 			</div>
             
             {signupError && <div className="alert alert-warning">{signupError}</div>}

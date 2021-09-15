@@ -1,6 +1,7 @@
 package microservices.book.multiplication.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -18,12 +19,13 @@ public class UserCoursesDTO extends RepresentationModel<UserCoursesDTO> {
 
     private User user;
 
-    private Courses course;
+    private CoursesDTO course;
 
     private Level level;
     private boolean complete;
     private boolean challenge;
     private String sessionId;
+
 
 
 }

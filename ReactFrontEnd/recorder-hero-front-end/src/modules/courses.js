@@ -28,6 +28,7 @@ export const allCourses = (username) => ({
   payload: {
     request: {
       url: '/progress/courses?username=' + username,
+      
     },
   },
 });

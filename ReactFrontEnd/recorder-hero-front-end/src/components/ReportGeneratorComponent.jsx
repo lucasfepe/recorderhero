@@ -121,7 +121,7 @@ const ReportGeneratorComponent = () => {
             }
         },
         series: [{
-            name: 'Reaction Time',
+            name: 'Average Reaction Time',
             data: report.timeValues
         }]
     });
@@ -163,7 +163,7 @@ const ReportGeneratorComponent = () => {
 		</div>
         </div>
 		<div className="container2">
-			<h2 align="center">Reaction Time</h2>
+			<h2 align="center">Average Reaction Time</h2>
 
 			<div id="container2"
 				><img src="image/chartplaceholder.png" alt="..." className="img-thumbnail img-square" />

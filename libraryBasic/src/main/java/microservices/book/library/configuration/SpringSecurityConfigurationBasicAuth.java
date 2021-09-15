@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Slf4j
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
@@ -25,6 +26,9 @@ public class SpringSecurityConfigurationBasicAuth
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
 
         http.cors().and()
+                .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.GET, "/users/status/check")
                 //.hasAuthority("SCOPE_profile")

@@ -9,4 +9,8 @@ public class DatabaseApi {
     private String findByUsernameUri;
     private String findAuthByUsernameUri;
     private String postSession;
+    private String findHighScoreByCourseAndChallengeAndUser;
+    private String postHighScore;
+    private String findChallengeByCode;
+    private String findUserCourse;
 }

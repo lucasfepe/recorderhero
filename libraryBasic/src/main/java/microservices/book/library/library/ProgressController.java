@@ -10,7 +10,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -34,7 +36,7 @@ public class ProgressController {
 //    }
 
     @GetMapping("/courses")
-    String getUserCoursesForUser(@RequestParam("username") String username, @AuthenticationPrincipal Jwt jwt) {
+    String getUserCoursesForUser(@RequestParam("username") String username, @AuthenticationPrincipal Jwt jwt, @RequestHeader Map<String, String> headers) {
 
         String usernameV = jwt.getClaim("preferred_username");
         if(username.equals(usernameV)) {

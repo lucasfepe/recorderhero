@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, Component } from 'react'
 import MenuComponent from './MenuComponent';
 import ScriptTag from 'react-script-tag';
 import { getReport } from "../modules/report";
-
+import CourseStartComponent from "./CourseStartComponent";
 import  Highcharts from "highcharts";
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter , MDBJumbotron} from 'mdbreact';
 
 
 
@@ -12,6 +13,9 @@ const RunSummaryComponent = (props) => {
 
     const dispatch = useDispatch();
     const report = useSelector((state) => state.report, shallowEqual)
+    const end_game = useSelector((state) => state.accidentals )
+    const courses = useSelector((state) => state.courses )
+    const [modal, setModal] =useState(end_game.levelup)
     // const [countKeySet, setCountKeySet]= useState( [])
     // const [mapMax, setMapMax]= useState( 0)
     // const [countValues, setCountValues]= useState( [])
@@ -24,6 +28,10 @@ const RunSummaryComponent = (props) => {
     // const [overallNoteCount, setOverallNoteCount]= useState( 0)
        
 
+   const toggle = () => {
+        setModal(!modal)
+        
+      }
 
 const reports = () => {
     if(report.correctValues != null){
@@ -126,7 +134,7 @@ Highcharts.chart('container2', {
         }
     },
     series: [{
-        name: 'Reaction Time',
+        name: 'Average Reaction Time',
         data: report.timeValues
     }]
 });
@@ -143,7 +151,9 @@ Highcharts.chart('container2', {
         useEffect(() => {
 
             dispatch(getReport(props.location.state.sessionId));
-          
+          if(end_game.levelup){
+            //   alert("level up");
+          }
             
         },[])
 
@@ -184,24 +194,61 @@ Highcharts.chart('container2', {
                 <ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/highcharts.js" />
                 <ScriptTag isHydrating={true} type="text/javascript" src="https://code.highcharts.com/modules/exporting.js" />
                
+
+
+
+
+
+
                 <div className="container">
                     <br/>
-			<h2 align="center ">Session Summary</h2>
+                <CourseStartComponent user_course={props.location.state.user_course}/>
+                    <br/>
+                    {end_game.challenge && <h2 className="center">To Pass: {courses[0].level.points}</h2>}
+                    {end_game.challenge && <h2 className="center">Score: {Math.trunc(end_game.score)}</h2>}
+			<h2 align="center" class="where">Session Summary</h2>
           
 
 			<div id="container"
 				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
+                    <img src="image/chartplaceholderdata.png" alt="..." className="" />
+                     {/* <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+                </div> 
 		</div>
 		<div className="container2">
-			<h2 align="center ">Reaction Time</h2>
+			<h2 align="center ">Average Reaction Time</h2>
 
 			<div id="container2"
-				>
-                    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-                </div>
-		</div></div>
+				><img src="image/chartplaceholderdata.png" alt="..." className="" />
+                     {/* <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
+                </div> 
+		</div>
+        
+        
+        
+        
+        
+
+
+      {(end_game.levelup || end_game.courseComplete) &&      
+<div id="modal">
+<MDBContainer>
+      <MDBBtn onClick={toggle}>Review Achievements</MDBBtn>
+      <MDBModal isOpen={modal} toggle={toggle}>
+        <MDBModalHeader toggle={toggle}>{end_game.levelup && "Level Up!"}{end_game.courseComplete && "Course Complete!"}</MDBModalHeader>
+        <MDBModalBody>
+        {end_game.levelup && "You are now in level " + end_game.level}
+        {end_game.courseComplete && "You can now freely access any level in the course!"}
+        </MDBModalBody>
+        <MDBModalFooter>
+          <MDBBtn color="secondary" onClick={toggle}>Close</MDBBtn>
+          {/* <MDBBtn color="primary">Save changes</MDBBtn> */}
+        </MDBModalFooter>
+      </MDBModal>
+    </MDBContainer>
+    </div>}
+        
+        </div>
           
         );
     

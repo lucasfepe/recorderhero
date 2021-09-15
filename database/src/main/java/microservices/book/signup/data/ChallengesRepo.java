@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface ChallengesRepo extends JpaRepository<Challenges, String> {
+public interface ChallengesRepo extends JpaRepository<Challenges, Integer> {
 
     List<Challenges> findByChallengeNumber(int challengeNumber);
+    Challenges findByCode(String code);
 
 
 }

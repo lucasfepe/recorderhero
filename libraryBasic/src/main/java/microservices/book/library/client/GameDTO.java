@@ -14,6 +14,7 @@ public class GameDTO {
     private long[] time_array_start;
     private long[] time_array_end;
     private String sessionId;
+    private int userCourseId;
 
 
 }

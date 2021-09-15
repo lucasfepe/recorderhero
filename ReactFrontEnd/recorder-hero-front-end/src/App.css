@@ -11,10 +11,7 @@
 	line-height: 19px;
 	
 }
-.home{
-	position:relative;
-	
-}
+
 .select-small{
 	width:30%;
 }
@@ -33,37 +30,43 @@ h2{
 .btn-default, .btn-default.dropdown-toggle{
 	background-color:#15f384 !important;
 }
-.home::before{
-	
-	content: "";
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background-image: url("./img/ladyrecorder.jpg");
-  background-size:cover;
-  /* filter:  */
 
-	height:100vh;
-	
+.home{
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%; height: 100%;
+	background-image: url("./img/ladyrecorder.jpg");
+	background-size:cover;
+	/* filter:  */
+  
+	  height:100vh;
 }
+
 .home-inside{
-	display:flex;
-	align-items:center;	
-	flex-wrap:wrap;
-	position: relative;
-	width:100%;
-	height: 100vh;
+	
+	
 }
-p{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
 .menu{
-flex-basis:100%;
-position: absolute;
-top: 0px;
-width: 100%;
+	flex-basis:100%;
+	position: block;
+	top: 0px;
+	width: 100%;
+	
+	
+	}
+p{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif}
 
+.welcomessage{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	
+	padding: 10px;
+  
+	
 
 }
-
 
 .pb-5.pt-2.w-50.rounded{
 	margin:auto;
@@ -73,7 +76,14 @@ width: 100%;
 	
 	
 }
-
+.table{
+	
+}
+#lookuphigh{
+	font-size: 28px;
+	
+	
+}
 .jumbotron{
 	margin:auto;
 	padding: 2rem 3rem;
@@ -83,6 +93,19 @@ width: 100%;
 	text-align: center;
 	
 }
+.row{
+	justify-content:center; 
+}
+
+.card{
+	margin-top: 3em;
+}
+
+
+
+.where{
+	/* margin-top: 100px; */
+}
 
 .navbar{
 	justify-content: center;
@@ -90,7 +113,9 @@ width: 100%;
 }
 nav{
 	text-align: center;
+	
 }
+
 
 body{
 	/* background-color:#666; */
@@ -99,11 +124,28 @@ body{
 .App {
   text-align: center;
 }
-
-.loginwrapper{
-	text-align:center;
-	
+.formContainer{
+	margin: 0 30%;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.274), 0 0 20px rgba(85, 85, 85, 0.356);
+	text-align:left;
+	position: relative;
+  
+  }
+#cardCustomRun{
+	 width:60% !important; 
 }
+#modal{
+	margin: 2em;
+}
+
+.homebtn.btn.login{
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+  }
 #container, #container2{
 	width: 550px; 
 	height: 400px; 
@@ -133,11 +175,7 @@ th {
   padding: 0.2em;
   margin: 0.1em;
 }
-.formContainer{
-  margin: 0 30%;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.274), 0 0 20px rgba(85, 85, 85, 0.356);
-  text-align:left;
-}
+
 
 
 
@@ -500,9 +538,7 @@ margin: 0.5em;}
 	  
 	  
   }
-  .homebtn.btn.login{
-	 margin-top:50% !important;
-  }
+  
   .btnSize{
 	   width:10em; 
 	  margin: 0 0.5em;

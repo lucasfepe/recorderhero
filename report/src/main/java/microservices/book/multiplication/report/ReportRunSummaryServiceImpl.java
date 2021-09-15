@@ -38,7 +38,9 @@ public class ReportRunSummaryServiceImpl implements ReportRunSummaryService {
         int timeMapMax;
         double reactionTime;
         int timeTotal = 0;
-
+        if(notes.size() == 1 && notes.get(0).getNote() == null){
+            return null;
+        }
 
         for (int i = 0; i < notes.size(); i++) {
 

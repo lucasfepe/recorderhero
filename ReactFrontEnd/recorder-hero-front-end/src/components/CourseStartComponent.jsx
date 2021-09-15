@@ -17,7 +17,10 @@ const CourseStartComponent = (props) => {
         dispatch({
 			type: 'CLEAR_REPORT'
 		  })
+<<<<<<< HEAD
           
+=======
+>>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
         props.user_course.challenge = event.target.value == "challenge" ? true:false;
         props.history.push({pathname:'/session',state: { detail: props.user_course }});
     }

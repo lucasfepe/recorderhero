@@ -5,7 +5,10 @@ import HttpService from "../ServicesNew/HttpService";
 
 const GENERATE_ACCIDENTALS = 'GENERATE_ACCIDENTALS';
 const GENERATE_ACCIDENTALS_GET = 'GENERATE_ACCIDENTALS';
+<<<<<<< HEAD
 const CLEAR_ACCIDENTALS = 'CLEAR_ACCIDENTALS';
+=======
+>>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
 const END_GAME = 'END_GAME';
 
 const accidentalsReducer = (state = [], action) => {
@@ -40,7 +43,10 @@ export const generateAccidentals = (userCourse) => ({
     },
   },
 });
+<<<<<<< HEAD
 //WILL NEED REVIEW
+=======
+>>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
 export const generateAccidentalsget = (userCourse) => ({
   type: GENERATE_ACCIDENTALS_GET,
   payload: {

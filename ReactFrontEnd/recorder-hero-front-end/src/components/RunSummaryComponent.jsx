@@ -202,10 +202,13 @@ Highcharts.chart('container2', {
 
                 <div className="container">
                     <br/>
+<<<<<<< HEAD
                 <CourseStartComponent user_course={props.location.state.user_course}/>
                     <br/>
                     {end_game.challenge && <h2 className="center">To Pass: {courses[0].level.points}</h2>}
                     {end_game.challenge && <h2 className="center">Score: {Math.trunc(end_game.score)}</h2>}
+=======
+>>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
 			<h2 align="center" class="where">Session Summary</h2>
           
 
@@ -222,6 +225,7 @@ Highcharts.chart('container2', {
 				><img src="image/chartplaceholderdata.png" alt="..." className="" />
                      {/* <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> */}
                 </div> 
+<<<<<<< HEAD
 		</div>
         
         
@@ -249,6 +253,9 @@ Highcharts.chart('container2', {
     </div>}
         
         </div>
+=======
+		</div></div>
+>>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
           
         );
     

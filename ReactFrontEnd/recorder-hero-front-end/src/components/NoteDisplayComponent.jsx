@@ -1,18 +1,19 @@
 import React, { Fragment, useState, useEffect, useRef, useDebugValue } from "react";
 import ScriptTag from 'react-script-tag';
 
-import { MDBBtn } from "mdbreact";
+
 import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
-import { generateAccidentals, endGame } from "../modules/accidentals";
-
+import { generateAccidentals, endGame, generateAccidentalsget } from "../modules/accidentals";
+import { MDBTooltip, MDBContainer, MDBBtn } from "mdbreact";
 
 
 const NoteDisplayComponent = (props) => {
 	const dispatch = useDispatch();
 	const useStateWithLabel = (initialValue, name) => {
 		const [value, setValue] = useState(initialValue);
+		
 		useDebugValue(`${name}: ${value}`);
 		return [value, setValue]; 
 	  } ;
@@ -20,6 +21,10 @@ const NoteDisplayComponent = (props) => {
 	const numberOfAccidentals = useSelector((state) => state.accidentals);
 	// const [sessionNotes, setSessionNotes] = useStateWithLabel([],"SessionNotes");
 	const [course, setCourse] = useStateWithLabel(props.location.state.detail, "course");
+	const [maxLevel, setMaxLevel] = useStateWithLabel(course.course.code.substring(course.course.code.length - 3) == "III" ? 36: 
+	course.course.code.substring(course.course.code.length - 2) == "II" ? 58 : 60, "maxLevel");
+	// var maxLevel;
+	var notesAcc = new Array("C0","Cs0_Db0","D0","Ds0_Eb0","E0_Fb0","Es0_F0","Fs0_Gb0","G0","Gs0_Ab0","A0","As0_Bb0","Cb1_B0","C1_Bs0","Cs1_Db1","D1","Ds1_Eb1","E1_Fb1","Es1_F1","Fs1_Gb1","G1","Gs1_Ab1","A1","As1_Bb1","Cb2_B1","C2_Bs1","Cs2_Db2","D2","Ds2_Eb2","E2_Fb2","Es2_F2","Fs2_Gb2","G2","Gs2_Ab2","A2","As2_Bb2","Cb3_B2","C3_Bs2","Cs3_Db3","D3","Ds3_Eb3","E3_Fb3","Es3_F3","Fs3_Gb3","G3","Gs3_Ab3","A3","As3_Bb3","Cb4_B3","C4_Bs3","Cs4_Db4","D4","Ds4_Eb4","E4_Fb4","Es4_F4","Fs4_Gb4","G4","Gs4_Ab4","A4","As4_Bb4","Cb5_B4","C5_Bs4","Cs5_Db5","D5","Ds5_Eb5","E5_Fb5","Es5_F5","Fs5_Gb5","G5","Gs5_Ab5","A5","As5_Bb5","B5_Cb6","C6_Bs5","Cs6_Db6","D6","Ds6_Eb6","E6_Fb6","Es6_F6","Fs6_Gb6","G6","Gs6_Ab6","A6","As6_Bb6","Cb7_B6","C7_Bs6","Cs7_Db7","D7","Ds7_Eb7","E7_Fb7","Es7_F7","Fs7_Gb7","G7","Gs7_Ab7","A7","As7_Bb7","Cb8_B7","C8_Bs7","Cs8_Db8","D8","Ds8_Eb8","E8_Fb8","Es8_F8","Fs8_Gb8","G8","Gs8_Ab8","A8","As8_Bb8","B8");
 	var noteLetterImg;
 	var noteScaleImg;
 	const [noteImage, setNoteImage] = useState();
@@ -30,39 +35,44 @@ const NoteDisplayComponent = (props) => {
 	var accs = null;
 	var analyzer = null;
 	var arr = null;
+	var level = course.level.level;
 	var audioContext;
 	const [audioContextState, setAudioContextState] = useStateWithLabel(audioContext, "audioContext");
 	var buf = null;
 	var buflen = 2048;
 	var clef = course.course.clef;
 	var date = null;
+	const[endReached, setEndReached] = useState(false);
 	var endClicked = false;
 	var firstNote = true;
 	var instrument_lower_limit_frequency = null;
 	var instrument_upper_limit_frequency = null;
 	const [isChallenge, setIsChallenge] = useStateWithLabel(course.challenge, "isChallenge");
+	const [keyImageFile, setKeyImageFile] = useState("image/key_T_" + course.level.keym + ".PNG")
 	var lowNoteIndex = 0;
 	var mode = course.course.instrument;
 	var modePrefix;
 	var newNoteVariable = null;
 	var no_sound_happened = true;
-	var noSharps = 0;
-	var noNaturals = 0;
-	var noFlats = 0;
+	var noSharps = useSelector((state) => state.accidentals.sharpCount);
+	var noNaturals = useSelector((state) => state.accidentals.naturalCount);
+	var time_array_start_dto = [];
+	const noFlats = useSelector((state) => state.accidentals.flatCount);
 	var noteValue = [];
 	var note_shown = 'C5';
 	const [note_shown_array, setNote_shown_array] = useStateWithLabel([],"note_shown_array");
 	var noteLetter = '';
 	const [note_input_array, setNote_input_array] = useStateWithLabel([],"note_input_array");
-	var notes_done = course.challenge ? 3 : null;
+	var notes_done = course.challenge ? 30 : null;
 	var sessionId = '';
-	const [notesLeft, setNotesLeft] = useStateWithLabel(course.challenge ? 3 : null,"notesLeft");
+	const [notesLeft, setNotesLeft] = useStateWithLabel(course.challenge ? 30 : null,"notesLeft");
+	var notesLeftVar = notesLeft;
 	var noteStrings = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 	var noteText = 'C';
 	var noteScale = '5';
 	var level_low_note = course.level.lowNote;
 	var numberOfNotes = course.level.highNote + 1 - course.level.lowNote;
-	var octave_shift = 1;
+	var octave_shift = course.course.octaveShift;
 	const [peeked_array, setPeeked_array] = useStateWithLabel([],"peeked_array");
 	var previousNote = "";
 	var time = null;
@@ -71,9 +81,9 @@ const NoteDisplayComponent = (props) => {
 	var time_interval_between_readings = 200;
 	var time_prev = 0;
 	var rafID;
-	var naturalBin = [];
-	var sharpBin = [];
-	var flatBin = [];
+	var naturalBin = useSelector((state) => state.accidentals.naturalBin);
+	var sharpBin = useSelector((state) => state.accidentals.sharpBin);
+	var flatBin = useSelector((state) => state.accidentals.flatBin);
 	var test = 0;
 	const [testState, setTestState] = useState(0);
 
@@ -101,7 +111,7 @@ const NoteDisplayComponent = (props) => {
 				}
 			}
 		}
-		var dd = props.user_course.course.lowNote
+		var dd = course.course.lowNote
 		lowNoteIndex = noteValue.indexOf(dd) + level_low_note
 		buf = new Float32Array(buflen);
 
@@ -305,17 +315,17 @@ const NoteDisplayComponent = (props) => {
 					var scale_pitch = Math.trunc(note / 12) - 1;
 					var current_note = noteStrings[note % 12] + scale_pitch;
 					if (no_sound_happened) {
-
-
+						if(!firstNote){
+						setNote_shown_array((note_shown_array) => [...note_shown_array, note_shown.replace("#", "s")]);
+						setNote_input_array((note_input_array) => [...note_input_array, current_note.replace("#", "s")]);
+						}
 
 						no_sound_happened = false;
 						if (pitch < instrument_upper_limit_frequency && pitch > instrument_lower_limit_frequency) {
 							date = new Date();
-							setTime_array_end((time_array_end) => [...time_array_end, date.getTime()]);
+							if(!firstNote) setTime_array_end((time_array_end) => [...time_array_end, date.getTime()]);
 							
-							if (notesLeft !== null) {
-								setNotesLeft(notesLeft--)
-							}
+							
 
 
 
@@ -323,11 +333,11 @@ const NoteDisplayComponent = (props) => {
 
 
 
-							var noteLetterImg = "";
-							if (note_shown == current_note) {
-								
-								increaseStat(numberOfAccidentals.listOfEntries.slice(0).reverse().indexOf(note_shown));
-
+							
+							if (notesAcc.findIndex(x => x.includes(note_shown.replace('#','s'))) == notesAcc.findIndex(x => x.includes(current_note.replace('#','s')))) {
+								if(!firstNote){
+								increaseStat(numberOfAccidentals.listOfEntries.slice(0).reverse().indexOf(note_shown.replace('#','s')));
+								}
 								feedbackElem.current.classList.add("bg-success");
 
 								setTimeout(() => {
@@ -347,9 +357,8 @@ const NoteDisplayComponent = (props) => {
 							setPeeked_array((peeked_array) => [...peeked_array, false]);
 
 							
-							setNote_shown_array((note_shown_array) => [...note_shown_array, note_shown]);
-							setNote_input_array((note_input_array) => [...note_input_array, current_note.replace("#", "s")]);
-							newNote();
+							
+							
 						} else {
 							feedbackElem.current.classList.add("bg-warning");
 
@@ -357,17 +366,26 @@ const NoteDisplayComponent = (props) => {
 
 								feedbackElem.current.classList.remove("bg-warning");
 							}, 400);
-							var time_array_start_dto = time_array_start;
+							// var time_array_start_dto = time_array_start;
 							time_array_start_dto.pop();
 							
 							date = new Date();
-							setTime_array_start((time_array_start_dto) => [...time_array_start_dto, date.getTime()]);
+							setTime_array_start(
+								 (time_array_start_dto) => [...time_array_start_dto]
+								);
 
 							newNote();
 						}
-
+						if (notesLeft !== null) {
+								
+							setNotesLeft(notesLeftVar--)
+							if(notesLeftVar == -1){
+								setEndReached(true);
+							}
+						}
 
 						firstNote = false;
+						newNote();
 					}
 
 
@@ -416,6 +434,7 @@ const NoteDisplayComponent = (props) => {
 						accidental = "n";
 						do {
 							note_shown = naturalBin[Math.trunc(Math.random() * 100) % naturalBin.length];
+							note_shown = note_shown.replace("s","").replace("b","");
 						} while (note_shown == previousNote && naturalBin.length > 1);
 					} else if (kso >= (noFlats)) {
 						accidental = "#";
@@ -503,7 +522,7 @@ const NoteDisplayComponent = (props) => {
 		}
 
 		note_shown = noteText + noteScale;
-		setNoteImage(modePrefix + noteLetterImg + noteScaleImg);
+		setNoteImage(modePrefix + noteLetterImg + accs.replace("#","s").replace("n","") + noteScaleImg);
 
 
 
@@ -538,10 +557,12 @@ const NoteDisplayComponent = (props) => {
 					duration: "q"
 				}).addAccidental(0, new VF.Accidental(accidental))];
 		} else {
+			
 			notes = [
 				// A quarter-note C.
 				new VF.StaveNote({
 					clef: clef.toLowerCase(), octave_shift: octave_shift,
+					
 					keys: [noteLetter + "/" + noteScale],
 					duration: "q"
 				})];
@@ -581,6 +602,7 @@ const NoteDisplayComponent = (props) => {
 		} else {
 			var stave = new VF.Stave(-2, 47, 400);
 			// Add a clef and time signature.
+			// stave.addKeySignature('E')
 			stave.addClef(clef.toLowerCase());
 			stave.setContext(context).draw();
 
@@ -589,25 +611,33 @@ const NoteDisplayComponent = (props) => {
 
 			//set start time for this note
 			var date = new Date();
-			setTime_array_start((time_array_start) => [...time_array_start, date.getTime()]);
+			
+			if(!firstNote){
+				time_array_start_dto = [...time_array_start_dto, date.getTime()];
+				setTime_array_start(time_array_start_dto);
+			}
 		}
 	}
 
-	const endClickedFunction = () => {
+	const endClickedFunction = (auto) => {
 		endClicked = true;
 		var time_array_start_dto = [...time_array_start];
-		time_array_start_dto.pop();
+	var levelScoreToPass = course.level.points;
+	var challengeId = course.level.challengeCode;
+	var courseCode = course.course.code;
 
-
+		dispatch({
+			type: 'CLEAR_ACCIDENTALS'
+		  })
 		dispatch(endGame(isChallenge, peeked_array, note_shown_array,
-			note_input_array, time_array_start_dto, time_array_end, numberOfAccidentals.sessionId))
+			note_input_array, time_array_start_dto, time_array_end, numberOfAccidentals.sessionId, level, levelScoreToPass, challengeId, courseCode, maxLevel))
 		
-			audioContextState.close();
+			if(!auto) audioContextState.close();
 		
 		setTimeout(()=>{
-			props.history.push({pathname:'/runsummary',state: { sessionId : numberOfAccidentals.sessionId}})
-		},500);
-		// })
+			props.history.push({pathname:'/runsummary',state: { sessionId : numberOfAccidentals.sessionId, user_course: props.user_course}})
+		},3000);
+		
 
 
 	}
@@ -623,11 +653,15 @@ const NoteDisplayComponent = (props) => {
 		
 		console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + numberOfAccidentals);
 	if(numberOfAccidentals.listOfEntries != null)vex()
+	console.log('i fire twice');
 	}, [numberOfAccidentals])
 
 	useEffect(() => {
-		dispatch(generateAccidentals(props.user_course));
+		console.log('i fire once');
+		dispatch(generateAccidentals(course));
 	},[])
+
+	useEffect(() => {if(endReached)endClickedFunction()},[endReached])
 
 	
 
@@ -638,13 +672,13 @@ const NoteDisplayComponent = (props) => {
 	return (
 		<>
 	<div className="col-4 ">
-                        <img src={"image/" + noteImage + ".PNG"}/>
+                        {course.challenge && <img src={"image/" + noteImage + ".PNG"}/>}
                     </div>
 		<div className="col-4 ">
 
 			<ScriptTag isHydrating={true} type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vexflow/3.0.9/vexflow-min.js" />
 			{notes_done && <div>Notes Left: {notesLeft}</div>}
-			<div className="vexbox ">
+			 <div className="vexbox ">
 				<div>
 					<div id="boo" className="boo " ></div>
 				</div>
@@ -654,7 +688,24 @@ const NoteDisplayComponent = (props) => {
 			
 			<div className="feedback bg-primary " ref={feedbackElem}></div>
 		
-			<MDBBtn gradient="aqua" onClick={() => endClickedFunction()}>End</MDBBtn>
+
+
+
+
+
+
+			<MDBContainer className="text-center p-5">
+      <MDBTooltip placement="top">
+        <MDBBtn color="primary">Key of {key}</MDBBtn>
+        <div><img src={keyImageFile}/></div>
+      </MDBTooltip>
+
+    </MDBContainer>
+
+
+
+		
+			<MDBBtn gradient="aqua" onClick={() => endClickedFunction(false)}>End</MDBBtn>
 
 
 		</div>

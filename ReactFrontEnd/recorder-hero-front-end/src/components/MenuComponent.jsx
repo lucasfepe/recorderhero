@@ -48,10 +48,10 @@ const MenuComponent = () => {
       My Stats
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
-        <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/achievements">Achievements</MDBNavLink></MDBDropdownItem>
+        {/* <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/achievements">Achievements</MDBNavLink></MDBDropdownItem>
         <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/stats">Stats Summary</MDBNavLink></MDBDropdownItem>
         <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/rewards">Rewards</MDBNavLink></MDBDropdownItem>
-        <MDBDropdownItem divider />
+        <MDBDropdownItem divider /> */}
         <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/report">Report Generator</MDBNavLink></MDBDropdownItem>
       </MDBDropdownMenu>
     </MDBDropdown>
@@ -62,18 +62,18 @@ const MenuComponent = () => {
       Rankings
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
-        <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/rankings">Achievements</MDBNavLink></MDBDropdownItem>
-        <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/challengerankings">Challenges</MDBNavLink></MDBDropdownItem>
+        {/* <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/rankings">Achievements</MDBNavLink></MDBDropdownItem> */}
+        <MDBDropdownItem><MDBNavLink className="blue-grey-text" to="/challengerankings">High Scores</MDBNavLink></MDBDropdownItem>
         
       </MDBDropdownMenu>
     </MDBDropdown>
                   </MDBNavItem>
-                  <MDBNavItem>
+                  {/* <MDBNavItem>
       <MDBDropdownToggle  color="default">
       <Link className="text-white" to="/shop">Shop</Link>
       </MDBDropdownToggle>
       
-                  </MDBNavItem>
+                  </MDBNavItem> */}
                  {UserService.hasRole(["developer"]) && 
                  <MDBNavItem>
                  <MDBDropdownToggle  color="default">

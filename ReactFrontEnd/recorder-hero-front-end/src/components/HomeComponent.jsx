@@ -14,10 +14,10 @@ const HomeComponent = () => {
 			  
 			<>
 				<div className="home">
-					
+				<MenuComponent />
 				<div className="home-inside">
 				
-				<MenuComponent />
+				
                 
 				
 			<br/>
@@ -26,7 +26,7 @@ const HomeComponent = () => {
 				
 
               
-			<div className=" pb-5 pt-2 w-50 rounded m">
+			<div className=" pb-5 pt-2 w-50 rounded welcomessage">
 				
      <h1 className="text-center mt-5 display-1"><strong>Welcome to Recorder Hero!</strong></h1>
 	 <p className=" text-center lead text-light">Learn musical notes and compete for the highest score!</p> 

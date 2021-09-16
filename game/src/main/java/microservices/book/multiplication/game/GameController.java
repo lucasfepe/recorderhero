@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import microservices.book.multiplication.client.EndGameDTO;
 import microservices.book.multiplication.client.GameDTO;
 import microservices.book.multiplication.client.LibraryApiClient;
 import microservices.book.multiplication.model.Courses;
 import microservices.book.multiplication.model.Level;
 import microservices.book.multiplication.model.UserCoursesDTO;
+import microservices.book.multiplication.util.ScoreCalculator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,19 +51,39 @@ public class GameController {
     }
 
 
+
+
+    @GetMapping("/enumerate_accidentals")
+    String d() throws JsonProcessingException {
+
+
+
+        return "jkol";
+    }
+
+
     @PostMapping("/end_game")
-    String archiveSession(@RequestBody GameDTO gameDTO) throws JsonProcessingException, InterruptedException {
+    EndGameDTO archiveSession(@RequestBody GameDTO gameDTO) throws JsonProcessingException, InterruptedException {
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        JsonNode jsonNode = objectMapper.readTree(string);
 //        log.info(jsonNode.toPrettyString());
         String sessionID = null;
+        double score = 0.0;
         log.info("Querying end_game {}",gameDTO);
         
             libraryApiClient.libraryArchive(gameDTO, SecurityContextHolder.getContext().getAuthentication()
 //                    SecurityContextHolder.getContext().getAuthentication().getName(), SecurityContextHolder.getContext().getAuthentication().getCredentials().toString()
             );
-            log.info("true!!!!!!!!!!!!!!!!!!");
-            return sessionID;
+            if(gameDTO.isChallenge()){
+                score = ScoreCalculator.execute(gameDTO);
+                EndGameDTO levelup = gameService.levelAnalysis(gameDTO, SecurityContextHolder.getContext().getAuthentication(), score * 200);
+                gameService.checkHighScore(score, gameDTO, SecurityContextHolder.getContext().getAuthentication());
+                EndGameDTO endGameDTO = new EndGameDTO(sessionID, levelup.isLevelup(), levelup.getLevel(), score, gameDTO.isChallenge(), levelup.isCourseComplete());
+                return endGameDTO;
+            }
+
+            return null;
+
       
 
     }

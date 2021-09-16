@@ -23,7 +23,7 @@ public class EnumerateAccidentals {
         switch(userCourse.getCourse().getInstrument()){
             case PICK:instrument_lowest_note = "";break;
             case ALTO_RECORDER:instrument_lowest_note = "Fb4";break;
-            case SOPRANO_RECORDER:instrument_lowest_note = "Cb5";break;
+            case SOPRANO_RECORDER:instrument_lowest_note = "C5";break;
             case TENOR_RECORDER:instrument_lowest_note = "Cb4";break;
             default:
                 throw new IllegalStateException("Unexpected value: " + userCourse.getCourse().getInstrument());
@@ -34,7 +34,7 @@ public class EnumerateAccidentals {
         boolean hasFlat = false;
         int counter = 0, accidentalCounter = 0, flatCounter = 0, sharpCounter = 0;
         char note;
-        boolean lowest_instrument_note_flat = false;
+        boolean isLowestNote = false;
         char prevNote = 0;
         String lastNote = null;
         String secondLastNote = null;
@@ -47,36 +47,35 @@ public class EnumerateAccidentals {
             if( entry.getKey().toString().equals(instrument_lowest_note)
             ) {
 
-                lowest_instrument_note_flat = true;
+                isLowestNote = true;
             }
-            if(!lowest_instrument_note_flat) {
-                sortedByValueNotesCount.put(entry.getKey(), entry.getValue());
-            }
+
             note = entry.getKey().toString().charAt(0);
 
 
 
 
             if(prevNote != note) {
-                if(counter == 2 && accidentalCounter == 1) {
+                if(counter == 2 && accidentalCounter == 1 ) {
 
+            if(!isLowestNote) {
+                numberOfNaturals++;
 
-                    numberOfNaturals++;
-
-                    if(sharpCounter == 1) {
-                        numberOfSharps--;
-                        naturalBin.add(lastNote);
-                        accidentalBin.pop();
-                        accidentalBin.add(lastNote);
-                        sharpBin.pop();
-                    }else {numberOfFlats--;
-                        naturalBin.add(secondLastNote);
-                        accidentalBin.pop();
-                        accidentalBin.add(secondLastNote);
-                        flatBin.pop();
-                    }
-
+                if (sharpCounter == 1) {
+                    numberOfSharps--;
+                    naturalBin.add(lastNote);
+                    accidentalBin.pop();
+                    accidentalBin.add(lastNote);
+                    sharpBin.pop();
+                } else {
+                    numberOfFlats--;
+                    naturalBin.add(secondLastNote);
+                    accidentalBin.pop();
+                    accidentalBin.add(secondLastNote);
+                    flatBin.pop();
                 }
+            }else{isLowestNote = !isLowestNote;
+                }}
                 if(prevNote != 0) {counter = 0;
                     accidentalCounter = 0;
                     sharpCounter = 0;
@@ -88,8 +87,7 @@ public class EnumerateAccidentals {
                     sharpBin.add(entry.getKey().toString());
                     accidentalBin.add(entry.getKey().toString());
                 }
-                else if(entry.getKey().toString().contains("b")
-                        && !lowest_instrument_note_flat) {
+                else if(entry.getKey().toString().contains("b")) {
                     numberOfFlats++;
                     accidentalCounter++;
                     flatCounter++;
@@ -108,8 +106,7 @@ public class EnumerateAccidentals {
                     sharpBin.add(entry.getKey().toString());
                     accidentalBin.add(entry.getKey().toString());
                 }
-                else if(entry.getKey().toString().contains("b")
-                        && !lowest_instrument_note_flat) {
+                else if(entry.getKey().toString().contains("b")) {
                     numberOfFlats++;
                     accidentalCounter++;
                     flatCounter++;
@@ -117,7 +114,7 @@ public class EnumerateAccidentals {
                     accidentalBin.add(entry.getKey().toString());
                 }
                 if(counter == 2 && accidentalCounter == 1) {
-
+                    if(!isLowestNote){
                     numberOfNaturals++;
 
                     if(sharpCounter == 1) {
@@ -134,6 +131,8 @@ public class EnumerateAccidentals {
                         flatBin.pop();
 //							nonAccidentBin.pop();
                     }
+                }else{
+                    isLowestNote = !isLowestNote;}
                 }
             }else {
                 if(entry.getKey().toString().contains("s")) {
@@ -143,7 +142,7 @@ public class EnumerateAccidentals {
                     sharpBin.add(entry.getKey().toString());
                     accidentalBin.add(entry.getKey().toString());
                 }
-                else if(entry.getKey().toString().contains("b") && !lowest_instrument_note_flat) {
+                else if(entry.getKey().toString().contains("b") ) {
                     numberOfFlats++;
                     accidentalCounter++;
                     flatCounter++;
@@ -167,7 +166,7 @@ public class EnumerateAccidentals {
         }
         List<NotesAccSep> collect = listOfEntries.stream().map(k -> k.getKey()).collect(Collectors.toList());
 
-        return new AccidentalsDTO(numberOfFlats, numberOfNaturals, numberOfSharps, userCourse.getSessionId(), collect);
+        return new AccidentalsDTO(numberOfFlats, numberOfNaturals, numberOfSharps, userCourse.getSessionId(), collect, flatBin, sharpBin, naturalBin);
 
 
     }

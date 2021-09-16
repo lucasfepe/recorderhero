@@ -14,6 +14,6 @@ public interface UserCoursesRepo extends JpaRepository<UserCourses, Integer> {
 
     List<UserCourses> findByUserUsername(String username);
     int countByUserUsername(String username);
-    UserCourses findByUserAndCourse(User user, Courses course);
+    UserCourses findByUserUsernameAndCourseCode(String username, String code);
 
 }

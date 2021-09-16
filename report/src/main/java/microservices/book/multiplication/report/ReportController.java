@@ -32,5 +32,13 @@ public class ReportController {
 
     }
 
+    @GetMapping
+    void gi()   {
+
+
+
+
+    }
+
 
 }

@@ -20,4 +20,9 @@ public class DatabaseApi {
     private String findUser;
     private String findSession;
     private String findSessionsByUserUsernameUri;
+    private String findUserCourseByUserUsernameAndCourseCode;
+    private String putUserCourse;
+    private String findUserCourseLevel;
+    private String findCourseByInstrumentClefCodeending;
+    private String listHighScores;
 }

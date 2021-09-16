@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore } from "redux";
-// import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import axiosMiddleware from "redux-axios-middleware";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
@@ -8,7 +8,7 @@ import HttpService from "./HttpService";
 
 const setup = () => {
   const enhancers = [ 
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ];
   const middleware = [
     thunk,
@@ -19,7 +19,9 @@ const setup = () => {
     enhancers.push(applyMiddleware(logger));
   }
 
-  const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers);
+  const composedEnhancers = composeWithDevTools(applyMiddleware(...middleware)
+  // , ...enhancers
+  );
 
   return createStore(rootReducer, composedEnhancers);
 };

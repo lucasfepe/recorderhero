@@ -6,6 +6,7 @@ import StoreService from "./ServicesNew/StoreService";
 import { Provider } from "react-redux";
 import './App.css';
 
+
 const store = StoreService.setup();
 
 // Wrap everything inside KeycloakProvider

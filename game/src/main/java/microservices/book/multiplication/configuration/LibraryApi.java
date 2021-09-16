@@ -8,4 +8,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class LibraryApi {
 
     private String postSession;
+    private String putUserCourse;
+
 }

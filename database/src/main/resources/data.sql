@@ -1,6 +1,5 @@
 Insert into part (part) values (1),(2),(3);
 
-
 INSERT INTO courses (code, instrument, clef, octave_shift, low_note,high_note,part_part) values
 ("SRTrHI",2,0,1,28,36,1),
 ("SRTrHII",2,0,1,35,41,2),

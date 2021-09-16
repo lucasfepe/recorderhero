@@ -13,6 +13,7 @@ import SessionComponent from './SessionComponent';
 import RunSummaryComponent from './RunSummaryComponent';
 import ShopComponent from './ShopComponent';
 import AdminComponent from './AdminComponent';
+import ListLevelsComponent from './ListLevelsComponent'
 
 
 import HomeComponent from './HomeComponent';
@@ -46,6 +47,7 @@ import PrivateRoute from '../utilities/PrivateRoute';
                             <PrivateRoute path="/rankings" exact component={AchievementsRankingsComponent} />
                             <PrivateRoute path="/challengerankings" exact component={ChallengeRankingsComponent} />
                             <PrivateRoute path="/shop" exact component={ShopComponent} />
+                            <PrivateRoute path="/listlevels" exact component={ListLevelsComponent} />
                             <PrivateRoute path="/admin" exact component={AdminComponent} />
                             </Switch>
     </Router>

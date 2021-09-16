@@ -4,6 +4,7 @@ import HttpService from "../ServicesNew/HttpService";
 
 
 const GET_REPORT = 'GET_REPORT';
+const CLEAR_REPORT = 'CLEAR_REPORT';
 
 
 const reportReducer = (state = [], action) => {
@@ -12,6 +13,9 @@ const reportReducer = (state = [], action) => {
 
     case GET_REPORT + SUCCESS_SUFFIX:
         return action.payload.data;
+
+    case CLEAR_REPORT:
+        return "";
 
     default:
       return state;

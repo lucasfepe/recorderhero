@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import microservices.book.multiplication.util.Clef;
 import microservices.book.multiplication.util.Mode;
 import microservices.book.multiplication.util.Notes;
+import net.minidev.json.annotate.JsonIgnore;
 
 
 @Data
@@ -22,6 +23,7 @@ public class Courses implements Comparable<Courses>{
 	private Notes lowNote;
 	private Notes highNote;
 	private Part part;
+
 
 	@Override
 	public int compareTo(Courses otherCourses) {

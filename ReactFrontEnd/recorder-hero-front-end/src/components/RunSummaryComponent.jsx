@@ -4,6 +4,8 @@ import ScriptTag from 'react-script-tag';
 import { getReport } from "../modules/report";
 import CourseStartComponent from "./CourseStartComponent";
 import  Highcharts from "highcharts";
+import { allCourses  } from "../modules/courses";
+import UserService from '../ServicesNew/UserService';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter , MDBJumbotron} from 'mdbreact';
 
@@ -14,7 +16,7 @@ const RunSummaryComponent = (props) => {
     const dispatch = useDispatch();
     const report = useSelector((state) => state.report, shallowEqual)
     const end_game = useSelector((state) => state.accidentals )
-    const courses = useSelector((state) => state.courses )
+    const { courses } = useSelector((state) => state )
     const [modal, setModal] =useState(end_game.levelup)
     // const [countKeySet, setCountKeySet]= useState( [])
     // const [mapMax, setMapMax]= useState( 0)
@@ -152,7 +154,7 @@ Highcharts.chart('container2', {
 
             dispatch(getReport(props.location.state.sessionId));
           if(end_game.levelup){
-            //   alert("level up");
+            dispatch(allCourses(UserService.getUsername())).then(res => console.log(res));
           }
             
         },[])
@@ -202,7 +204,7 @@ Highcharts.chart('container2', {
 
                 <div className="container">
                     <br/>
-                <CourseStartComponent user_course={props.location.state.user_course}/>
+                <CourseStartComponent user_course={courses[0]} level={courses[0].level.level}/>
                     <br/>
                     {end_game.challenge && <h2 className="center">To Pass: {courses[0].level.points}</h2>}
                     {end_game.challenge && <h2 className="center">Score: {Math.trunc(end_game.score)}</h2>}
@@ -237,7 +239,7 @@ Highcharts.chart('container2', {
       <MDBModal isOpen={modal} toggle={toggle}>
         <MDBModalHeader toggle={toggle}>{end_game.levelup && "Level Up!"}{end_game.courseComplete && "Course Complete!"}</MDBModalHeader>
         <MDBModalBody>
-        {end_game.levelup && "You are now in level " + end_game.level}
+        {end_game.levelup && "You are now in level " + courses[0].level.level}
         {end_game.courseComplete && "You can now freely access any level in the course!"}
         </MDBModalBody>
         <MDBModalFooter>

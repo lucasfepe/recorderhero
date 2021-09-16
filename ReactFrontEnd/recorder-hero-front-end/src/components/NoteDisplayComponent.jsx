@@ -23,7 +23,7 @@ const NoteDisplayComponent = (props) => {
 	const numberOfAccidentals = useSelector((state) => state.accidentals);
 	// const [sessionNotes, setSessionNotes] = useStateWithLabel([],"SessionNotes");
 	const [course, setCourse] = useStateWithLabel(props.location.state.detail, "course");
-	const [maxLevel, setMaxLevel] = useStateWithLabel(course.course.code.substring(course.course.code.length - 3) == "III" ? 36: 
+	const [maxLevel, setMaxLevel] = useStateWithLabel(course.course.code == null ? '' :course.course.code.substring(course.course.code.length - 3) == "III" ? 36: 
 	course.course.code.substring(course.course.code.length - 2) == "II" ? 58 : 60, "maxLevel");
 	// var maxLevel;
 	var notesAcc = new Array("C0","Cs0_Db0","D0","Ds0_Eb0","E0_Fb0","Es0_F0","Fs0_Gb0","G0","Gs0_Ab0","A0","As0_Bb0","Cb1_B0","C1_Bs0","Cs1_Db1","D1","Ds1_Eb1","E1_Fb1","Es1_F1","Fs1_Gb1","G1","Gs1_Ab1","A1","As1_Bb1","Cb2_B1","C2_Bs1","Cs2_Db2","D2","Ds2_Eb2","E2_Fb2","Es2_F2","Fs2_Gb2","G2","Gs2_Ab2","A2","As2_Bb2","Cb3_B2","C3_Bs2","Cs3_Db3","D3","Ds3_Eb3","E3_Fb3","Es3_F3","Fs3_Gb3","G3","Gs3_Ab3","A3","As3_Bb3","Cb4_B3","C4_Bs3","Cs4_Db4","D4","Ds4_Eb4","E4_Fb4","Es4_F4","Fs4_Gb4","G4","Gs4_Ab4","A4","As4_Bb4","Cb5_B4","C5_Bs4","Cs5_Db5","D5","Ds5_Eb5","E5_Fb5","Es5_F5","Fs5_Gb5","G5","Gs5_Ab5","A5","As5_Bb5","B5_Cb6","C6_Bs5","Cs6_Db6","D6","Ds6_Eb6","E6_Fb6","Es6_F6","Fs6_Gb6","G6","Gs6_Ab6","A6","As6_Bb6","Cb7_B6","C7_Bs6","Cs7_Db7","D7","Ds7_Eb7","E7_Fb7","Es7_F7","Fs7_Gb7","G7","Gs7_Ab7","A7","As7_Bb7","Cb8_B7","C8_Bs7","Cs8_Db8","D8","Ds8_Eb8","E8_Fb8","Es8_F8","Fs8_Gb8","G8","Gs8_Ab8","A8","As8_Bb8","B8");
@@ -677,7 +677,8 @@ const NoteDisplayComponent = (props) => {
 	return (
 		<>
 	<div className="col-4 ">
-                        {course.challenge && <img src={"image/" + noteImage + ".PNG"}/>}
+                        {!course.challenge && <img src={"image/" + noteImage + ".PNG"}
+						/>}
                     </div>
 		<div className="col-4 ">
 

@@ -6,11 +6,9 @@ import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { generateAccidentals, endGame, generateAccidentalsget } from "../modules/accidentals";
-<<<<<<< HEAD
-import { MDBTooltip, MDBContainer, MDBBtn } from "mdbreact";
-=======
 
->>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
+import { MDBTooltip, MDBContainer, MDBBtn } from "mdbreact";
+
 
 
 const NoteDisplayComponent = (props) => {
@@ -626,13 +624,10 @@ const NoteDisplayComponent = (props) => {
 	const endClickedFunction = (auto) => {
 		endClicked = true;
 		var time_array_start_dto = [...time_array_start];
-<<<<<<< HEAD
 	var levelScoreToPass = course.level.points;
 	var challengeId = course.level.challengeCode;
 	var courseCode = course.course.code;
-=======
 		time_array_start_dto.pop();
->>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
 
 		dispatch({
 			type: 'CLEAR_ACCIDENTALS'
@@ -666,11 +661,8 @@ const NoteDisplayComponent = (props) => {
 
 	useEffect(() => {
 		console.log('i fire once');
-<<<<<<< HEAD
 		dispatch(generateAccidentals(course));
-=======
 		dispatch(generateAccidentals(props.user_course));
->>>>>>> 5a83b81a0b3d281c43b7f8650fea5473532f87a0
 	},[])
 
 	useEffect(() => {if(endReached)endClickedFunction()},[endReached])

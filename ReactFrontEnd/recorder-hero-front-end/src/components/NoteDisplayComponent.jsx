@@ -6,7 +6,9 @@ import Vex from "vexflow";
 import { withRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { generateAccidentals, endGame, generateAccidentalsget } from "../modules/accidentals";
+
 import { MDBTooltip, MDBContainer, MDBBtn } from "mdbreact";
+
 
 
 const NoteDisplayComponent = (props) => {
@@ -626,6 +628,8 @@ const NoteDisplayComponent = (props) => {
 	var challengeId = course.level.challengeCode;
 	var courseCode = course.course.code;
 
+
+
 		dispatch({
 			type: 'CLEAR_ACCIDENTALS'
 		  })
@@ -659,6 +663,7 @@ const NoteDisplayComponent = (props) => {
 	useEffect(() => {
 		console.log('i fire once');
 		dispatch(generateAccidentals(course));
+
 	},[])
 
 	useEffect(() => {if(endReached)endClickedFunction()},[endReached])

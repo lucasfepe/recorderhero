@@ -249,6 +249,7 @@ Highcharts.chart('container2', {
     </div>}
         
         </div>
+
           
         );
     

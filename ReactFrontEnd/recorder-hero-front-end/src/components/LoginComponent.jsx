@@ -98,7 +98,9 @@ const LoginComponent = () => {
 			<input type="text" name="lastName"  className="text form-control" placeholder="last name" value={lastName} onChange={e => setLastName(e.target.value)} />
 		</div><div className="d-flex justify-content-around  align-items-center ">
 		
+
 			<button type="button"  className=" btn btn-danger my-3"  onClick={signUpClicked}>Sign Up</button>
+
 			</div>
             
             {signupError && <div className="alert alert-warning">{signupError}</div>}

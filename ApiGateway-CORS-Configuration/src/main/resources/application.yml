@@ -1,15 +1,29 @@
+
+
+
 spring:
+  profiles: prod
   cloud:
     gateway:
       globalcors:
         cors-configurations:
           '[/**]':
-
             allowedOrigins: "https://recorder-hero.ca"
-
             allowedMethods: ['*']
             allowedHeaders: ['*']
 
+---
+
+spring:
+  profiles: dev
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "https://localhost"
+            allowedMethods: [ '*' ]
+            allowedHeaders: [ '*' ]
 #logging:
 #  level:
 #    org.springframework.cloud.gateway: TRACE

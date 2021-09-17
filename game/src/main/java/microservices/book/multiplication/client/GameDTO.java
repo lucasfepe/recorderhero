@@ -20,7 +20,7 @@ public class GameDTO {
     private long[] time_array_start;
     private long[] time_array_end;
     private String sessionId;
-    private int level;
+    private Integer level;
     private int levelScoreToPass;
     private String challengeId;
     private String courseCode;
@@ -35,7 +35,7 @@ public class GameDTO {
                    @JsonProperty("time_array_start") long[] time_array_start,
                    @JsonProperty("time_array_end") long[] time_array_end
             , @JsonProperty("sessionId") String sessionId
-            , @JsonProperty("level") int level
+            , @JsonProperty("level") Integer level
             , @JsonProperty("levelScoreToPass") int levelScoreToPass
                    , @JsonProperty("challengeId") String challengeId
     , @JsonProperty("courseCode") String courseCode

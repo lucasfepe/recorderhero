@@ -119,7 +119,8 @@ const CustomRunComponent = (props) => {
                             accidentals: isAccidental  ? "ON": "OFF",
                             keym: key,
                             lowNote: 0,
-                            highNote: highNoteindex
+                            highNote: highNoteindex,
+                            level: null
                         },
                         course: {
                             clef: clef,

@@ -1,0 +1,32 @@
+server:
+  ssl:
+    enabled: false
+    key-store: classpath:localhost.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+    trust-store-type: PKCS12
+spring:
+  profiles: dev
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://localhost:8443/auth/realms/myrealm
+
+
+---
+
+server:
+  ssl:
+    enabled: false
+    key-store: classpath:certificate.p12
+    key-store-password: secret
+    key-store-type: PKCS12
+    trust-store-type: PKCS12
+spring:
+  profiles: prod
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://recorder-hero.ca:8443/auth/realms/myrealm

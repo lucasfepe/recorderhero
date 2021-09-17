@@ -40,4 +40,6 @@ Features:
  - Role based content display
  - RESTful microservice architecture
  - Authentication token will only fetch data for a single user
+ - Encrypted database passwords in properties file
+ - profiles for prod and dev in properties file
 

@@ -41,6 +41,7 @@ Features:
  - RESTful microservice architecture
  - Authentication token will only fetch data for a single user
  - Encrypted database passwords in properties file
- - profiles for prod and dev in properties file
+ - Profiles for prod and dev in properties file
  - Visible content based on user role
+ - Https enabled
 

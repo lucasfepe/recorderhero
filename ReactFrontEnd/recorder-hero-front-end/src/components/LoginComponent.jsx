@@ -113,7 +113,8 @@ const LoginComponent = () => {
 		
 
 
-</div></div></div>
+</div></div>
+<div className="text-center copyright">Copyright &copy; 2021 Lucas Pereira, All rights reserved. </div></div>
 
 
 

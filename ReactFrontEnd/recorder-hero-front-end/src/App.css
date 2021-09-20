@@ -162,6 +162,8 @@ body{
 	-ms-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
   }
+
+
 #container, #container2{
 	width: 550px; 
 	height: 400px; 
@@ -717,6 +719,21 @@ margin: 0.5em;}
 	
 		
 	}
-	
+	.homebtn.btn.login{
+		margin: 0;
+		position: absolute;
+		top: 20%;
+		left: 50%;
+		-ms-transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%);
+	  }
+	  .bottom-background{
+		position:absolute;
+		z-index:-1;
+		top:50%;
+		height:110vh;
+		width:100%;
+		background: url("./img/bunting-flag.png") repeat center center fixed;
+	  }
 	  
   }

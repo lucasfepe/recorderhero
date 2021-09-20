@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = 'http://localhost:8099'
+const API_URL = 'https://localhost:8099'
 
 
 class SignUpService {

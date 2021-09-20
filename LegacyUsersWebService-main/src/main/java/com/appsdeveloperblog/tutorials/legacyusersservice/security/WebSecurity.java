@@ -1,5 +1,6 @@
 package com.appsdeveloperblog.tutorials.legacyusersservice.security;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,6 +13,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	        http
 	        .cors().and()
 	        .csrf().disable().authorizeRequests()
+					.antMatchers(HttpMethod.OPTIONS).permitAll()
 	        .antMatchers("/users/**")
 //					.permitAll()
 	        .access("hasIpAddress(\"127.0.0.1\") or hasIpAddress(\"::1\")")

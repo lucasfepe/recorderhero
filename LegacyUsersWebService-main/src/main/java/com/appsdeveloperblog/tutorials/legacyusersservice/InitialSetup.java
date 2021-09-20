@@ -42,10 +42,31 @@ public class InitialSetup {
                 bCryptPasswordEncoder.encode("ma"),
                 "",
                 false);
+        usersRepository.save(user);
 
+        user = new UserEntity(
+                2L,
+                "user",
+                "qswe3mg84mfjtuser",
+                "user",
+                "user",
+                "user",
+                bCryptPasswordEncoder.encode("user"),
+                "",
+                false);
+        usersRepository.save(user);
 
-
-      usersRepository.save(user);
+        user = new UserEntity(
+                3L,
+                "admin",
+                "qswe3mg84mfjtadmin",
+                "admin",
+                "admin",
+                "admin",
+                bCryptPasswordEncoder.encode("admin"),
+                "",
+                false);
+        usersRepository.save(user);
 
     }
 }

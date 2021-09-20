@@ -46,11 +46,15 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<UserRest> getUsers() {
         List<UserRest> returnValue = new ArrayList<>();
-        UserRest returnUser = new UserRest();
+//        UserRest returnUser = new UserRest();
 
         List<UserEntity> userEntity = usersRepository.findAll();
-        userEntity.stream().map(a -> {BeanUtils.copyProperties(a, returnUser); return returnUser;})
-                .forEach(a -> returnValue.add(a));
+        for (UserEntity userEntityd: userEntity
+             ) {
+
+            returnValue.add(new UserRest(userEntityd.getFirstName(), userEntityd.getLastName(), userEntityd.getEmail(),
+                    userEntityd.getEmail(), userEntityd.getUserId()));
+        }
 
         return returnValue;
     }

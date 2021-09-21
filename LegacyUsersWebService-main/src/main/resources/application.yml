@@ -1,6 +1,6 @@
 server:
   ssl:
-    enabled: false
+    enabled: true
     key-store: classpath:localhost.p12
     key-store-password: changeit
     key-store-type: PKCS12
@@ -11,14 +11,14 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8443/auth/realms/myrealm
+          issuer-uri: https://localhost:8443/auth/realms/myrealm
 
 
 ---
 
 server:
   ssl:
-    enabled: false
+    enabled: true
     key-store: classpath:certificate.p12
     key-store-password: secret
     key-store-type: PKCS12
@@ -29,4 +29,4 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://recorder-hero.ca:8443/auth/realms/myrealm
+          issuer-uri: https://recorder-hero.ca:8443/auth/realms/myrealm

@@ -44,4 +44,5 @@ Features:
  - Profiles for prod and dev in properties file
  - Visible content based on user role
  - Https enabled
+ - Needs a certain role in authentication server to access certain endpoint
 

@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
 import javax.sql.DataSource;
 
@@ -36,18 +37,24 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(new KeycloakRoleConverter());
+
         http
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/users/**")
-                .permitAll()
+
 //                .access("hasIpAddress(\"127.0.0.1\") or hasIpAddress(\"::1\")")
-                .antMatchers("/h2-console/**").permitAll()
+//                .antMatchers("/h2-console/**").permitAll()
                 .anyRequest()
-                .permitAll()
-//                .authenticated()
+                .authenticated()
+
                 .and()
+                .oauth2ResourceServer()
+                .jwt()
+                .jwtAuthenticationConverter(jwtAuthenticationConverter)
+                .and().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         ;

@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
                .map(User::getUsername)
                .anyMatch(u -> u.equals(user.getUsername()))){
            user.setEnabled(true);
-           user.setPassword(passwordEncoder.encode(user.getPassword()));
+
            userRepository.save(user);
 
            log.info("User {} saved in database", user.getUsername());

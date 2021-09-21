@@ -87,4 +87,12 @@ public class GameController {
       
 
     }
+
+    @GetMapping("/admin")
+    String ddd()   {
+
+
+
+        return "admin";
+    }
 }

@@ -14,10 +14,10 @@ public class User {
 
     private String id;
     private String username;
-    private String password;
+
     private boolean enabled;
 
-    public User(final String username, String password) {
-        this(null, username, password, true);
+    public User(final String username) {
+        this(null, username, true);
     }
 }

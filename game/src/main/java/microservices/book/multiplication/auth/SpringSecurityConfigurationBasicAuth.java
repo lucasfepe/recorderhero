@@ -84,9 +84,9 @@ public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerA
 //                            response.sendError(409, "");})
 //                .and()
                 .authorizeRequests()
-
-//                .antMatchers(HttpMethod.GET, "/users/status/check")
-                //.hasAuthority("SCOPE_profile")
+//              This part actually functions as expected how exciting!!!
+                             .antMatchers(HttpMethod.GET, "/game/admin")
+                               .hasAuthority("ROLE_developer")
 //                .hasRole("developer")
                 //.hasAnyAuthority("ROLE_developer")
                 //.hasAnyRole("devleoper","user")

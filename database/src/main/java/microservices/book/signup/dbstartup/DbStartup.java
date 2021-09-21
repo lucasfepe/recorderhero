@@ -31,7 +31,9 @@ public class DbStartup {
     @PostConstruct
     private void init(){
 
-        User u = new User("ma", passwordEncoder.encode("ma"));
+        //guest user
+
+        User u = new User("ma");
         userRepo.save(u);
         authoritiesRepo.save(new Authorities("ma","USER"));
 
@@ -43,9 +45,7 @@ public class DbStartup {
         userCoursesRepo.save(uc);
 
 
-         u = new User("admin", passwordEncoder.encode("admin"));
-        userRepo.save(u);
-        authoritiesRepo.save(new Authorities("admin","ADMIN"));
+
 
     }
 }

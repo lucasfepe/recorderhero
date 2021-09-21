@@ -1,12 +1,18 @@
-import  React from "react";
+import  React, {useEffect} from "react";
 import MenuComponent from './MenuComponent';
 import { Link } from 'react-router-dom';
 import UserService from '../ServicesNew/UserService';
-import {useSelector} from 'react-redux';
-
+import {isFirstTimeUser} from '../modules/isFirstTimeUser'
+import { useDispatch, useSelector } from "react-redux";
 
 
 const HomeComponent = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		
+		dispatch(isFirstTimeUser(UserService.getUsername()));
+	})
 
 	const { courses } = useSelector((state) => state);
     

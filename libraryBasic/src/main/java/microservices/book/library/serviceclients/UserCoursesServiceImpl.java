@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -34,15 +36,16 @@ public class UserCoursesServiceImpl implements UserCoursesService {
         this.restTemplateBuilder = restTemplateBuilder;
 
         this.databaseHostUrl = databaseHostUrl;
+
     }
 
 
 
     @Override
-    public String getAllUserCoursesByUsername(String username) {
+    public String getAllUserCoursesByUsername(String username, Authentication authentication) {
         try {
-
-            this.restTemplate = restTemplateBuilder.build();
+            Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+            this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
 
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getFindByUserUsernameUri())

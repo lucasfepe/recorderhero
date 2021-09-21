@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.core.env.Environment;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,11 +41,12 @@ public class ProgressController {
 
         String usernameV = jwt.getClaim("preferred_username");
         if(username.equals(usernameV)) {
-            String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username);
+            String userCoursesJson = userCoursesService.getAllUserCoursesByUsername(username, SecurityContextHolder.getContext().getAuthentication());
             log.info("User {} has retrieved course list", username);
 
             return userCoursesJson;
         }else{
+            log.warn("User {} has tried to retrieved course list for another user {}", usernameV, username);
             return null;
         }
 //                "Working on port: " + env.getProperty("local.server.port");

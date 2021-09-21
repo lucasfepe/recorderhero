@@ -5,7 +5,8 @@ import report from './report'
 import sessions from './sessions'
 import sessionStats from './sessionStats'
 import highScores from './highScores'
+import  isFirstTimeUser  from "./isFirstTimeUser";
 
 export default combineReducers({
-   courses, accidentals, report, sessions, sessionStats, highScores
+   courses, accidentals, report, sessions, sessionStats, highScores, isFirstTimeUser
 });

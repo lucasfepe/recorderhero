@@ -3,8 +3,10 @@ import React, {  useState, useCallback  } from 'react'
 import SignUpService from '../services/SignUpService.js';
 import { Tabs } from 'react-bootstrap';
 import { Tab } from 'react-bootstrap';
-import UserService from '../ServicesNew/UserService';
+
 import { useHistory } from "react-router-dom";
+
+import { newUser  } from "../modules/courses";
 
 const LoginComponent = () => {
     let history = useHistory();
@@ -15,6 +17,7 @@ const LoginComponent = () => {
     const [passwordRepeat, setPasswordRepeat] = useState();
     const [signupError, setSignupError] = useState();
     const [key, setKey] =  useState();
+    
     
     const [signupMessage, setSignupMessage] = useState();
    
@@ -37,10 +40,14 @@ const LoginComponent = () => {
         else {
             setSignupError('')
         SignUpService.executeSignUp(username,password, firstName, lastName).then(() => {
+         
             setKey("login")
             setSignupMessage("Sign Up Successful! Please login.")
         }
-        ).catch(() => {setSignupError("Can't create new user, username unavailable")});
+        ).catch(() => {setSignupError("Can't create new userin Identity provider")});
+        
+       
+       
 
     }},[username,password, passwordRepeat, firstName, lastName]);
     
@@ -55,8 +62,7 @@ const LoginComponent = () => {
         return (
             <div className="login">
                 
-                {UserService.hasRole(['ClientAdmin']) && <div>Client Admin Role present</div>}
-                {UserService.hasRole(['developer']) && <div>developer Role present</div>}
+              
                 <div className="bottom-background"></div>
                 <h1 id="welcome">Welcome to Recorder Hero!</h1>
               <div className="verticalCenter">

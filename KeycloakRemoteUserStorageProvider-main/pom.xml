@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.appsdeveloperblog.keycloak</groupId>
-	<artifactId>MyRemoteUserStorageProvider</artifactId>
+	<artifactId>MyRemoteUserStorageProviderP</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MyRemoteUserStorageProvider</name>
+	<name>MyRemoteUserStorageProviderP</name>
 	<description>Keycloak User Storage Provider Implementation</description>
 
 	<properties>
@@ -65,7 +65,7 @@
 	</dependencies>
 
 	<build>
-	<finalName>my-remote-user-storage-provider2</finalName>
+	<finalName>my-remote-user-storage-providerP</finalName>
 <!-- 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

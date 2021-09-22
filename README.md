@@ -45,4 +45,5 @@ Features:
  - Visible content based on user role
  - Https enabled
  - Needs a certain role in authentication server to access certain endpoint
+ - Cors and CSRF aware
 

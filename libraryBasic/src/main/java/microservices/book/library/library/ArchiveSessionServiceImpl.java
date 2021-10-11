@@ -17,6 +17,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -48,8 +50,9 @@ public class ArchiveSessionServiceImpl implements ArchiveSessionService {
     }
 
     @Override
-    public void archiveSession(GameDTO gameDTO, String username) throws JsonProcessingException {
-        this.restTemplate = restTemplateBuilder.build();
+    public void archiveSession(GameDTO gameDTO, String username, Authentication authentication) throws JsonProcessingException {
+        Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+        this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
 //        ResponseEntity<Session> forEntity = null;
         ResponseEntity<EntityModel<Session>> forEntity = null;
         ResponseEntity<EntityModel<User>> userResponse = null;

@@ -18,6 +18,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -63,7 +65,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 
         try {
 
-            this.restTemplate = restTemplateBuilder.basicAuthentication(adminLogin.getUsername(), adminLogin.getPassword()).build();
+            this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + ((Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getTokenValue()).build();
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getPostSession());
             log.info("Post to Querying: {}", builder.toUriString());

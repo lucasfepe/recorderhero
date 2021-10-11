@@ -18,6 +18,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -51,8 +53,9 @@ public class SessionServiceImpl implements SessionService {
 
 
     @Override
-    public String getAllSession(String username) {
-        this.restTemplate = restTemplateBuilder.build();
+    public String getAllSession(String username, Authentication authentication) {
+        Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+        this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
         builder = UriComponentsBuilder
                 .fromUriString(databaseHostUrl + databaseApi.getFindSessionsByUserUsernameUri())
                 .queryParam("username",username);

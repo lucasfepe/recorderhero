@@ -22,6 +22,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -57,8 +59,9 @@ public class LevelupServiceImpl implements LevelupService {
 
 
     @Override
-    public void levelup(GameDTO gameDTO, String name) throws IOException {
-        this.restTemplate = restTemplateBuilder.build();
+    public void levelup(GameDTO gameDTO, String name, Authentication authentication) throws IOException {
+        Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+        this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
 //        ResponseEntity<Session> forEntity = null;
         ResponseEntity<EntityModel<UserCourses>> forEntity = null;
         ResponseEntity<EntityModel<Level>> levelEntity = null;

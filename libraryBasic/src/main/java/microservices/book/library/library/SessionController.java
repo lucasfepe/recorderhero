@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -36,7 +37,7 @@ public class SessionController {
 
     @GetMapping("/getAll")
     String userHasUnifishedCourse(@RequestParam("username") String username) {
-        String sessionsJson = sessionService.getAllSession(username);
+        String sessionsJson = sessionService.getAllSession(username, SecurityContextHolder.getContext().getAuthentication());
 
 
         return sessionsJson;
@@ -66,9 +67,9 @@ public class SessionController {
         }
 
 
-        String courseCode = coursesService.getCourseFromInstrumentClefAndCourseCodeEnding(instrument, clef, codeEnding);
+        String courseCode = coursesService.getCourseFromInstrumentClefAndCourseCodeEnding(instrument, clef, codeEnding, SecurityContextHolder.getContext().getAuthentication());
         String challengeCode = String.valueOf(key.ordinal()) + rangeInt;
-        Collection<HighScore> highScores = highScoreService.find(courseCode, challengeCode);
+        Collection<HighScore> highScores = highScoreService.find(courseCode, challengeCode, SecurityContextHolder.getContext().getAuthentication());
         return highScores;
     }
 

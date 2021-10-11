@@ -17,6 +17,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -52,8 +54,9 @@ public class CoursesServiceImpl implements CoursesService {
 
 
     @Override
-    public String getCourseFromInstrumentClefAndCourseCodeEnding(Mode instrument, Clef clef, String codeEnding) {
-        this.restTemplate = restTemplateBuilder.build();
+    public String getCourseFromInstrumentClefAndCourseCodeEnding(Mode instrument, Clef clef, String codeEnding, Authentication authentication) {
+        Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+        this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
         ResponseEntity<EntityModel<Courses>> course = null;
         //get course from given parameters
         builder = UriComponentsBuilder

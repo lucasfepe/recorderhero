@@ -11,6 +11,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -42,8 +44,9 @@ public class HighScoreServiceImpl implements HighScoreService {
 
 
     @Override
-    public Collection<HighScore> find(String courseCode, String challengeCode) {
-        this.restTemplate = restTemplateBuilder.build();
+    public Collection<HighScore> find(String courseCode, String challengeCode, Authentication authentication) {
+        Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+        this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
        ResponseEntity<PagedModel<HighScore>> highScores = null;
         //get course from given parameters
         builder = UriComponentsBuilder

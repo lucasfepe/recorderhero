@@ -26,7 +26,7 @@ public class LevelController {
     boolean levelUp(GameDTO gameDTO) throws IOException {
 
 
-        levelupService.levelup(gameDTO, SecurityContextHolder.getContext().getAuthentication().getName());
+        levelupService.levelup(gameDTO, SecurityContextHolder.getContext().getAuthentication().getName(), SecurityContextHolder.getContext().getAuthentication());
 
         return true;
     }

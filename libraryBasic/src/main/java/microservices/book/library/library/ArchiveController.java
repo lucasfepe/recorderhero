@@ -23,7 +23,7 @@ public class ArchiveController {
     boolean archiveSession(@RequestBody GameDTO gameDTO) throws JsonProcessingException {
 
 
-        archiveSessionService.archiveSession(gameDTO, SecurityContextHolder.getContext().getAuthentication().getName());
+        archiveSessionService.archiveSession(gameDTO, SecurityContextHolder.getContext().getAuthentication().getName(), SecurityContextHolder.getContext().getAuthentication() );
 
         return true;
     }

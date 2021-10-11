@@ -74,13 +74,14 @@ public class GameController {
             libraryApiClient.libraryArchive(gameDTO, SecurityContextHolder.getContext().getAuthentication()
 //                    SecurityContextHolder.getContext().getAuthentication().getName(), SecurityContextHolder.getContext().getAuthentication().getCredentials().toString()
             );
+            if(gameDTO.getLevel() != null){
             if(gameDTO.isChallenge() || gameDTO.getLevel() < 7 ){
                 score = ScoreCalculator.execute(gameDTO);
                 EndGameDTO levelup = gameService.levelAnalysis(gameDTO, SecurityContextHolder.getContext().getAuthentication(), score );
                 gameService.checkHighScore(score, gameDTO, SecurityContextHolder.getContext().getAuthentication());
                 EndGameDTO endGameDTO = new EndGameDTO(sessionID, levelup.isLevelup(), levelup.getLevel(), score, gameDTO.isChallenge(), levelup.isCourseComplete());
                 return endGameDTO;
-            }
+            }}
 
             return null;
 

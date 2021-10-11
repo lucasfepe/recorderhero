@@ -4,6 +4,8 @@ import { getHighScores } from "../modules/highScores";
 import MenuComponent from './MenuComponent';
 import Vex from "vexflow";
 import Divider from '@material-ui/core/Divider'
+import { allCourses  } from "../modules/courses";
+import UserService from '../ServicesNew/UserService'
 import { MDBModal, MDBTooltip,  MDBAlert , MDBModalBody, MDBModalHeader, MDBModalFooter, MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBIcon , MDBTable, MDBTableBody, MDBTableHead} from 'mdbreact';
 
 const CustomRunComponent = (props) => {
@@ -30,7 +32,12 @@ const CustomRunComponent = (props) => {
     const [isAccidental, setIsAccidental] = useStateWithLabel(false, "isAccidental")
     const [accidentalSlider, setAccidentalSlider] = useStateWithLabel(50, "AccidentalSlider")
     const [startError, setStartError] = useStateWithLabel('', "startError");
- 
+    useEffect(() => {
+
+      dispatch(allCourses(UserService.getUsername())).then(res => console.log(res));
+       
+
+   }, [])
 
    const toggle = () => {
         setModal(!modal)

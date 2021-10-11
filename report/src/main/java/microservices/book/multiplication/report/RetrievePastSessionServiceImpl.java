@@ -58,9 +58,10 @@ public class RetrievePastSessionServiceImpl implements RetrievePastSessionServic
         try {
 
 
-            Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
-            this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
-
+            if (authentication != null && authentication.getPrincipal() instanceof Jwt) {
+                this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + ((Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getTokenValue()).build();} else{
+                this.restTemplate = restTemplateBuilder.build();
+            }
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getRetrievePastNotes())
                     .queryParam("id", sessionID);

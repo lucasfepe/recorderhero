@@ -7,6 +7,7 @@ import microservices.book.multiplication.client.GameDTO;
 import microservices.book.multiplication.client.ReportDTO;
 import microservices.book.multiplication.model.NoteHistory;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -25,7 +26,7 @@ public class ReportController {
 
     @GetMapping("/run_summary/{sessionID}")
     ReportDTO archiveSession(@PathVariable("sessionID") Integer sessionID) throws InterruptedException {
-        List<NoteHistory> notes = (List<NoteHistory>) retrievePastSessionService.execute(sessionID);
+        List<NoteHistory> notes = (List<NoteHistory>) retrievePastSessionService.execute(sessionID, SecurityContextHolder.getContext().getAuthentication());
         log.info("nowwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww");
         return reportRunSummaryService.execute(notes);
 

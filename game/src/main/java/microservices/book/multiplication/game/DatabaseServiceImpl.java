@@ -18,6 +18,8 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.http.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -51,7 +53,7 @@ public class DatabaseServiceImpl implements DatabaseService {
 
 
     @Override
-    public String newSession(UserCoursesDTO userCourse) {
+    public String newSession(UserCoursesDTO userCourse, Authentication authentication) {
         SessionDTO session = new SessionDTO();
         session.setClef(userCourse.getCourse().getClef());
         session.setKeym(userCourse.getLevel().getKeym());
@@ -63,7 +65,8 @@ public class DatabaseServiceImpl implements DatabaseService {
 
         try {
 
-            this.restTemplate = restTemplateBuilder.basicAuthentication(adminLogin.getUsername(), adminLogin.getPassword()).build();
+            Jwt authenticationPrincipal = (Jwt) authentication.getPrincipal();
+            this.restTemplate = restTemplateBuilder.defaultHeader("Authorization","Bearer " + authenticationPrincipal.getTokenValue()).build();
             builder = UriComponentsBuilder
                     .fromUriString(databaseHostUrl + databaseApi.getPostSession());
             log.info("Post to Querying: {}", builder.toUriString());

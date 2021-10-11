@@ -44,7 +44,7 @@ public class GameController {
         String c = jsonNode.toString();
         UserCoursesDTO userCourse = new ObjectMapper().readValue(c, UserCoursesDTO.class);
         log.info("Level is having accidentals enumerated");
-        String sessionId = databaseService.newSession(userCourse);
+        String sessionId = databaseService.newSession(userCourse,SecurityContextHolder.getContext().getAuthentication());
         userCourse.setSessionId(sessionId);
 
         return ResponseEntity.ok(gameService.enumerateAccidentals(userCourse));

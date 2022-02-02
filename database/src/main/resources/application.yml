@@ -20,7 +20,7 @@ server:
   ssl:
     enabled: false
     key-store: classpath:certificate.p12
-    key-store-password: hi
+    key-store-password: secret
     key-store-type: PKCS12
     trust-store-type: PKCS12
 spring:

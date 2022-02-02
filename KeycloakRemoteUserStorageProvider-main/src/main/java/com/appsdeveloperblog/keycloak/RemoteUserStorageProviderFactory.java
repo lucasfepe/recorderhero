@@ -16,7 +16,7 @@ public class RemoteUserStorageProviderFactory implements UserStorageProviderFact
 		 
 		return new RemoteUserStorageProvider(session, 
 				model, 
-				buildHttpClient("https://localhost:8099"));
+				buildHttpClient("http://localhost:8099"));
 	}
 
 	@Override
